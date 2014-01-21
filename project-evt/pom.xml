@@ -3,10 +3,10 @@
 	<parent>
 		<groupId>com.redhat.poc</groupId>
 		<artifactId>top-evt</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>project-evt</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>MODULE :: EVENT :: PARENT PROJECT</name>
 	<packaging>pom</packaging>
 	<properties>
