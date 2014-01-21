@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.redhat.poc</groupId>
 		<artifactId>project-evt</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4-SNAPSHOT</version>
 		<relativePath>../project-evt</relativePath>
 	</parent>
 	<artifactId>feature-evt</artifactId>
