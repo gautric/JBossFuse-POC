@@ -10,9 +10,9 @@
     <module>project-evt</module>
   </modules>
   <scm>
-   <connection>scm:git:file://.</connection>
-   <developerConnection>scm:git:file://.</developerConnection>
-   <url>scm:git:file://.</url>
+   <connection>scm:git:https://github.com/gautric/JBossFuse-PoC.git</connection>
+   <developerConnection>scm:git:https://github.com/gautric/JBossFuse-PoC.git</developerConnection>
+   <url>scm:git:https://github.com/gautric/JBossFuse-PoC.git</url>
   </scm>
   <build>
    <plugins>
