@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	name="feature-evt">
+	<!-- feature url: mvn:com.redhat.poc/feature-evt/${project.version}/xml/features -->
+
+	<feature name="emission-evt" version="${project.version}">
+		<feature>jpa</feature>
+		<feature>http</feature>
+		<feature>jndi</feature>
+		<feature>transaction</feature>
+		<feature>activemq-camel</feature>
+		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
+		<bundle>mvn:com.redhat.poc/mt-emission-evt/${project.version}</bundle>
+	</feature>
+	<feature name="reception-evt" version="${project.version}">
+		<feature>jpa</feature>
+		<feature>http</feature>
+		<feature>jndi</feature>
+		<feature>transaction</feature>
+		<feature>activemq-camel</feature>
+		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
+		<bundle>mvn:com.redhat.poc/mt-reception-evt/${project.version}
+		</bundle>
+	</feature>
+	<feature name="main-evt" version="${project.version}">
+		<feature>http</feature>
+		<feature>jndi</feature>
+		<feature>transaction</feature>
+		<feature>activemq-camel</feature>
+		<bundle>mvn:com.redhat.poc/osgi-main-evt/${project.version}</bundle>
+	</feature>
+
+</features>

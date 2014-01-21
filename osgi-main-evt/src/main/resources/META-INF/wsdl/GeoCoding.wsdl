@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:redhat.com:poc/ws" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="urn:redhat.com:poc/exception" name="GeoCodingServiceImplService" targetNamespace="urn:redhat.com:poc/ws">
+  <wsdl:types>
+    <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:redhat.com:poc/ws" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="urn:redhat.com:poc/exception" elementFormDefault="unqualified" targetNamespace="urn:redhat.com:poc/ws" version="1.0">
+      <xs:element name="convertCodeToName" type="tns:convertCodeToName"/>
+      <xs:element name="convertCodeToNameResponse" type="tns:convertCodeToNameResponse"/>
+      <xs:complexType name="convertCodeToName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="convertCodeToNameResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:redhat.com:poc/exception" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="urn:redhat.com:poc/exception" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:redhat.com:poc/exception">
+      <xsd:element name="UnknownCodeException" type="tns:UnknownCodeException"/>
+      <xsd:complexType name="UnknownCodeException">
+        <xsd:sequence/>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UnknownCodeException">
+    <wsdl:part element="ns1:UnknownCodeException" name="UnknownCodeException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertCodeToName">
+    <wsdl:part element="tns:convertCodeToName" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertCodeToNameResponse">
+    <wsdl:part element="tns:convertCodeToNameResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GeoCodingServiceImpl">
+    <wsdl:operation name="convertCodeToName">
+      <wsdl:input message="tns:convertCodeToName" name="convertCodeToName">
+    </wsdl:input>
+      <wsdl:output message="tns:convertCodeToNameResponse" name="convertCodeToNameResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:UnknownCodeException" name="UnknownCodeException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeoCodingServiceImplServiceSoapBinding" type="tns:GeoCodingServiceImpl">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="convertCodeToName">
+      <soap12:operation soapAction="" style="document"/>
+      <wsdl:input name="convertCodeToName">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="convertCodeToNameResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCodeException">
+        <soap12:fault name="UnknownCodeException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeoCodingServiceImplService">
+    <wsdl:port binding="tns:GeoCodingServiceImplServiceSoapBinding" name="GeoCodingServiceImplPort">
+      <soap12:address location="http://localhost:8181/cxf/services/geocoding"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

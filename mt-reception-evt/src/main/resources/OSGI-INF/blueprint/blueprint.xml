@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/blueprint"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="brokerURL" value="${activemq.broker.url}" />
+		<property name="userName" value="admin" />
+		<property name="password" value="admin" />
+	</bean>
+
+	<!-- OSGI blueprint property placeholder -->
+	<cm:property-placeholder
+		id="module.technique.reception.evenement.placeholder" persistent-id="module.technique.reception.evenement">
+		<!-- list some properties for this test -->
+		<cm:default-properties>
+			<cm:property name="jms.reception.evenement.route.in"
+				value="activemq:queue:reception.evenement.queue" />
+			<cm:property name="jms.reception.evenement.route.out"
+				value="direct:reception.transformation" />
+			<cm:property name="reception.transformation.evenement.route.out"
+				value="direct:reception.evenement" />
+			<cm:property name="activemq.broker.url" value="tcp://localhost:61616" />
+			<cm:property name="reception.evenement.route.out" value="mock:result" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<camelContext trace="false" id="module.technique.reception.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
+    <route id="jms.reception.evenement.route">
+        <from uri="activemq:queue:reception.evenement.queue"/>
+        <to uri="{{jms.reception.evenement.route.out}}"/>
+    </route>
+    <route id="reception.transformation.evenement.route">
+        <from uri="direct:reception.transformation"/>
+        <unmarshal>
+            <jaxb contextPath="com.redhat.poc.vo" partClass="com.redhat.poc.vo.Event"/>
+        </unmarshal>
+        <to uri="{{reception.transformation.evenement.route.out}}"/>
+    </route>
+    <route id="reception.evenement.route">
+        <from uri="direct:reception.evenement"/>
+        <to uri="log:com.redhat.poc?showAll=true&amp;showBodyType=true"/>
+        <to uri="{{reception.evenement.route.out}}"/>
+    </route>
+</camelContext>
+
+</blueprint>

@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.redhat.poc</groupId>
+		<artifactId>project-evt</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../project-evt</relativePath>
+	</parent>
+	<artifactId>object-evt</artifactId>
+	<name>MODULE :: EVENT :: JAVA CLASS</name>
+	<packaging>jar</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+				</exclusion>
+			</exclusions>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<!-- profiles> <profile> <id>openjpa</id> <build> <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> 
+		<artifactId>openjpa-maven-plugin</artifactId> <configuration> <addDefaultConstructor>true</addDefaultConstructor> 
+		<enforcePropertyRestriction>true</enforcePropertyRestriction> <persistenceXmlFile>${basedir}/src/main/resources/META-INF/persistence-openjpa.xml</persistenceXmlFile> 
+		</configuration> <executions> <execution> <id>enhancer</id> <phase>process-classes</phase> 
+		<goals> <goal>enhance</goal> </goals> </execution> </executions> <dependencies> 
+		<dependency> <groupId>org.apache.openjpa</groupId> <artifactId>openjpa</artifactId> 
+		<version>${openjpa.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+		<artifactId>slf4j-api</artifactId> <version>${slf4j.version}</version> </dependency> 
+		</dependencies> </plugin> </plugins> </build> </profile> </profiles -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.4.0</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Export-Package>
+							com.redhat.poc.vo
+						</Export-Package>
+						<Import-Package>
+							javax.persistence;version="[1.1,2)",
+							org.hibernate.annotations;version="[4.3,5)";resolution:="optional",
+							org.hibernate.*,
+							org.apache.openjpa.*,
+							*
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
