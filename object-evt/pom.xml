@@ -42,6 +42,7 @@
 							<addDefaultConstructor>true</addDefaultConstructor>
 							<enforcePropertyRestriction>true</enforcePropertyRestriction>
 							<persistenceXmlFile>${basedir}/src/main/resources/META-INF/persistence-openjpa.xml</persistenceXmlFile>
+							<connectionDriverName>org.apache.derby.jdbc.ClientBaseDataSource</connectionDriverName>
 						</configuration>
 						<executions>
 							<execution>
@@ -49,6 +50,13 @@
 								<phase>process-classes</phase>
 								<goals>
 									<goal>enhance</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>sqler</id>
+								<phase>process-classes</phase>
+								<goals>
+									<goal>sql</goal>
 								</goals>
 							</execution>
 						</executions>

@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.redhat.poc</groupId>
-		<artifactId>top-evt</artifactId>
-		<version>0.0.4-SNAPSHOT</version>
-	</parent>
+	<!-- parent> <groupId>com.redhat.poc</groupId> <artifactId>top-evt</artifactId> 
+		<version>0.0.4-SNAPSHOT</version> </parent -->
+	<groupId>com.redhat.poc</groupId>
+	<version>0.0.4-SNAPSHOT</version>
 	<artifactId>project-evt</artifactId>
+
 	<name>MODULE :: EVENT :: PARENT PROJECT</name>
 	<packaging>pom</packaging>
 	<properties>
@@ -15,7 +16,7 @@
 		<camel.version>2.10.0.redhat-60024</camel.version>
 		<activemq.version>5.8.0.redhat-60024</activemq.version>
 		<cxf.version>2.6.0.redhat-60024</cxf.version>
-		<debry.version>10.9.1.0</debry.version>
+		<debry.version>10.8.2.2</debry.version>
 		<osgi.jta.datasource>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/eventds)</osgi.jta.datasource>
 	</properties>
 	<dependencyManagement>
@@ -85,6 +86,11 @@
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-camel</artifactId>
 				<version>${activemq.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jpa</artifactId>
+				<version>${camel.version}</version>
 			</dependency>
 			<!-- logging -->
 			<dependency>

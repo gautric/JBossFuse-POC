@@ -1,5 +1,6 @@
 package com.redhat.poc.mt.reception.evt;
 
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 
 import org.junit.Test;
@@ -13,9 +14,11 @@ public class RouteTest extends CamelBlueprintTestSupport {
 
     @Test
     public void testRoute() throws Exception {
+    	
+
         // the route is timer based, so every 5th second a message is send
         // we should then expect at least one message
-      // Thread.sleep(2000000);
+       //Thread.sleep(2000000);
     }
 
 }

@@ -21,10 +21,22 @@
 	</feature>
 	<feature name="reception-evt" version="${project.version}">
 		<feature>jpa</feature>
+		<feature>camel-jpa</feature>
 		<feature>http</feature>
 		<feature>jndi</feature>
 		<feature>transaction</feature>
 		<feature>activemq-camel</feature>
+		<bundle>mvn:org.apache.geronimo.components/geronimo-connector/2.2.2
+		</bundle>
+		<bundle>mvn:commons-pool/commons-pool/1.5</bundle>  <!-- TODO template it -->
+		<bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
+		<bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
+		<bundle>mvn:commons-lang/commons-lang/2.5</bundle>
+		<bundle>mvn:net.sourceforge.serp/com.springsource.serp/1.13.1</bundle>
+		<bundle>mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle>
+		<bundle>mvn:org.apache.derby/derbyclient/${debry.version}</bundle>
+		<bundle>wrap:mvn:org.tranql/tranql-connector/1.7</bundle>
+		<bundle>wrap:mvn:org.tranql/tranql-connector-derby-common/1.4</bundle>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/mt-reception-evt/${project.version}
 		</bundle>
@@ -34,6 +46,7 @@
 		<feature>jndi</feature>
 		<feature>transaction</feature>
 		<feature>activemq-camel</feature>
+
 		<bundle>mvn:com.redhat.poc/osgi-main-evt/${project.version}</bundle>
 	</feature>
 

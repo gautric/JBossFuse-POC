@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(namespace = "urn:redhat.com:poc/class")
 public class Event {
 	@Id
-	@GeneratedValue(generator = "uuid-string")
+	//@GeneratedValue(generator = "uuid-string", strategy=)
 	//@GenericGenerator(name = "uuid-string", strategy = "uuid2")
 	private String id;
 	@Column(name = "creationTime")
