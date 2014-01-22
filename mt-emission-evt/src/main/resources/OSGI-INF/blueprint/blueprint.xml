@@ -19,17 +19,17 @@
 		id="module.technique.emission.evenement.placeholder" persistent-id="module.technique.emission.evenement">
 		<!-- list some properties for this test -->
 		<cm:default-properties>
+			<cm:property name="timer.evenement.period" value="10000" />
 			<cm:property name="generation.evenement.route.out" value="direct:emission.evenement" />
 			<cm:property name="emission.evenement.route.out"
 				value="activemq:queue:emission.evenement.queue" />
-			<cm:property name="activemq.broker.url"
-				value="tcp://localhost:61616" />
+			<cm:property name="activemq.broker.url" value="tcp://localhost:61616" />
 		</cm:default-properties>
 	</cm:property-placeholder>
 
 	<camelContext trace="false" id="module.technique.emission.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
     <route autoStartup="true" id="timer.evenement.route">
-        <from uri="timer:timer?period=1000"/>
+        <from uri="timer:timer?period={{timer.evenement.period}}"/>
         <setHeader headerName="source.generation">
             <constant>timer.route</constant>
         </setHeader>
