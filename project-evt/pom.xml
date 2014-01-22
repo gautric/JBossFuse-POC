@@ -15,6 +15,7 @@
 		<camel.version>2.10.0.redhat-60024</camel.version>
 		<activemq.version>5.8.0.redhat-60024</activemq.version>
 		<cxf.version>2.6.0.redhat-60024</cxf.version>
+		<debry.version>10.9.1.0</debry.version>
 		<osgi.jta.datasource>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/eventds)</osgi.jta.datasource>
 	</properties>
 	<dependencyManagement>
