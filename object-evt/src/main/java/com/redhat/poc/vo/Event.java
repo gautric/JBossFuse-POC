@@ -12,8 +12,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
 @NamedQueries(value = {
 		@NamedQuery(name = "event.per.state", query = "SELECT e FROM Event e WHERE e.state = :state"),
@@ -25,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Event {
 	@Id
 	@GeneratedValue(generator = "uuid-string")
-	@GenericGenerator(name = "uuid-string", strategy = "uuid2")
+	//@GenericGenerator(name = "uuid-string", strategy = "uuid2")
 	private String id;
 	@Column(name = "creationTime")
 	private Date creationTime;
@@ -45,6 +43,10 @@ public class Event {
 	@Enumerated(EnumType.STRING)
 	private State state;
 
+	public Event(){
+		super();
+	}
+	
 	public State getState() {
 		return state;
 	}
