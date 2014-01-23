@@ -39,6 +39,7 @@ public class EventGenerator implements Processor {
 		event.setSystem(Referentiel.randomSystem());
 		event.setCreationTime(Calendar.getInstance().getTime());
 		event.setGeo(Referentiel.randomISO3166_1alpha_3());
+		event.setVersion(Referentiel.randomVersion());
 		event.setState(State.NEW);
 
 		if (StringUtils.isNotBlank(body)) {

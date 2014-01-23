@@ -28,9 +28,11 @@ public class Referentiel {
 	private static final String[] SYSTEMS = new String[] { "Interne",
 			"Externe", "N/A" };
 
-	private static final String[] GEO = new String[] { "BRA",
-		"CAN", "DNK" , "FRA" , "JPN" , "MAR" , "RUS" };
-	
+	private static final String[] GEO = new String[] { "BRA", "CAN", "DNK",
+			"FRA", "JPN", "MAR", "RUS" };
+
+	private static final String[] VERSION = new String[] { "1.0", "1.1", "2.0" };
+
 	private static final Random RANDOM = new Random();
 
 	/**
@@ -46,12 +48,19 @@ public class Referentiel {
 	public static final String randomSystem() {
 		return SYSTEMS[RANDOM.nextInt(SYSTEMS.length)];
 	}
-	
+
 	/**
 	 * Generate a random name.
 	 */
 	public static final String randomISO3166_1alpha_3() {
 		return GEO[RANDOM.nextInt(GEO.length)];
+	}
+
+	/**
+	 * Generate a random name.
+	 */
+	public static final String randomVersion() {
+		return VERSION[RANDOM.nextInt(VERSION.length)];
 	}
 
 }
