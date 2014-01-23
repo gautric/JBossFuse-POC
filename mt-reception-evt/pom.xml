@@ -46,12 +46,8 @@
 			</exclusions>
 			<scope>test</scope>
 		</dependency>
-		<!--dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-all</artifactId>
-			<version>4.0</version>
-			<scope>test</scope>
-		</dependency-->
+		<!--dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm-all</artifactId> 
+			<version>4.0</version> <scope>test</scope> </dependency -->
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jpa_2.0_spec</artifactId>
@@ -140,6 +136,7 @@
 						<Import-Package>
 							com.redhat.poc.vo,
 							*</Import-Package>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 					</instructions>
 				</configuration>
 			</plugin>

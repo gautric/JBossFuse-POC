@@ -27,7 +27,6 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<profiles>
@@ -113,7 +112,7 @@
 							org.apache.openjpa.util.*,
 							*
 						</Import-Package>
-						<Meta-Persistence>META-INF/persistence-openjpa.xml</Meta-Persistence>
+						<!-- Meta-Persistence>META-INF/persistence-openjpa.xml</Meta-Persistence-->
 					</instructions>
 				</configuration>
 			</plugin>

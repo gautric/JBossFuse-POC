@@ -22,7 +22,7 @@
 			<cm:property name="activemq.broker.url"
 				value="failover:(tcp://localhost:61616)?jms.prefetchPolicy.all=1" />
 			<cm:property name="reception.evenement.route.out"
-				value="jpa://com.redhat.poc.vo.Event?persistenceUnit=event-openjpa-pu" />
+				value="jpa://com.redhat.poc.vo.Event?persistenceUnit=event-reception-pu" />
 		</cm:default-properties>
 	</cm:property-placeholder>
 
