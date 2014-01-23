@@ -21,13 +21,14 @@ public class XMLTestCase {
 		Event e = new Event();
 		e.setId(UUID.randomUUID().toString());
 		e.setState(State.NEW);
+		e.setVersion("2.0");
 		JAXBContext jc = JAXBContext.newInstance(Event.class);
 		Marshaller marshaller = jc.createMarshaller();
 		marshaller.marshal(e, System.out);
 
 	}
 
-	public static String xml = "<ns2:event xmlns:ns2=\"urn:redhat.com:poc/class\">"
+	public static String xml = "<ns2:event xmlns:ns2=\"urn:redhat.com:poc/class\" version=\"1.0\">"
 			+ "<author>Marie</author>"
 			+ "<date>2014-01-18T20:15:25.889+01:00</date>"
 			+ "<state>NEW</state>" + "<system>Externe</system>"
@@ -40,7 +41,7 @@ public class XMLTestCase {
 		Unmarshaller marshaller = jc.createUnmarshaller();
 		Event e = (Event)marshaller.unmarshal(new StringBufferInputStream(xml));
 		Assert.assertEquals("Marie",e.getAuthor());
-		
+		Assert.assertEquals("1.0",e.getVersion());
 
 	}
 }

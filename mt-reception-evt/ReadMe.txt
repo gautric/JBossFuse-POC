@@ -4,7 +4,7 @@ Camel Router Project for Blueprint (OSGi)
 To build this project use
 
     mvn install
-
+dd
 To run the example you can execute the following Maven goal
 
     mvn camel:run

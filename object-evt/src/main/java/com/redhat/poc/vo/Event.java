@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -42,6 +43,18 @@ public class Event {
 	@Column(name = "state")
 	@Enumerated(EnumType.STRING)
 	private State state;
+
+	@XmlAttribute(name = "version")
+	@Transient
+	private String _version;
+	
+	public String getVersion() {
+		return _version;
+	}
+
+	public void setVersion(String _version) {
+		this._version = _version;
+	}
 
 	public Event(){
 		super();
