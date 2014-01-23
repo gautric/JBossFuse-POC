@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- parent> <groupId>com.redhat.poc</groupId> <artifactId>top-evt</artifactId> 
 		<version>0.0.4-SNAPSHOT</version> </parent -->
@@ -121,7 +121,8 @@
 		<module>../mt-reception-evt</module>
 		<module>../osgi-main-evt</module>
 		<module>../feature-evt</module>
-	</modules>
+    <module>../osgi-service-evt</module>
+  </modules>
 	<profiles>
 		<profile>
 			<id>openjpa</id>
@@ -142,7 +143,7 @@
 				<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
 				<jdbc.driver>org.h2.Driver</jdbc.driver>
 				<xa.datasource>org.h2.jdbcx.JdbcDataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
+				<javax.persistence.jdbc.url/>
 				<javax.persistence.jdbc.url.testing>jdbc:h2:mem:eventDB;DB_CLOSE_DELAY=-1</javax.persistence.jdbc.url.testing>
 			</properties>
 		</profile>
@@ -156,7 +157,7 @@
 				<hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
 				<jdbc.driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc.driver>
 				<xa.datasource>org.apache.derby.jdbc.EmbeddedXADataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
+				<javax.persistence.jdbc.url/>
 				<javax.persistence.jdbc.url.testing>jdbc:derby:memory:eventDB;create=true</javax.persistence.jdbc.url.testing>
 			</properties>
 		</profile>
@@ -167,8 +168,8 @@
 				<hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
 				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
 				<xa.datasource>org.postgresql.xa.PGXADataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
-				<javax.persistence.jdbc.url.testing />
+				<javax.persistence.jdbc.url/>
+				<javax.persistence.jdbc.url.testing/>
 			</properties>
 		</profile>
 	</profiles>
