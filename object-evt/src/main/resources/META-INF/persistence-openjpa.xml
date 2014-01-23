@@ -19,14 +19,8 @@
 		<class>com.redhat.poc.vo.Event</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
-			<!-- property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(SchemaAction='dropDB,createDB,add')" 
-				/ -->
 			<property name="openjpa.InitializeEagerly" value="false" />
 			<property name="openjpa.NontransactionalWrite" value="false" />
-			<!-- property name="openjpa.jdbc.DBDictionary" value="derby" / -->
-			<!-- derby connection properties <property name="openjpa.ConnectionDriverName" 
-				value="org.apache.derby.jdbc.EmbeddedDriver"/> <property name="openjpa.ConnectionURL" 
-				value="jdbc:derby:localhost/camel;create=true"/ -->
 		</properties>
 	</persistence-unit>
 
