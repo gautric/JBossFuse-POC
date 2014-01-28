@@ -79,6 +79,40 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>xml</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jaxb2-maven-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>schemagen</id>
+								<goals>
+									<goal>schemagen</goal>
+								</goals>
+							</execution>
+						</executions>
+
+						<configuration>
+							<transformSchemas>
+								<transformSchema>
+									<uri>urn:redhat.com:poc/class</uri>
+									<toPrefix>evt</toPrefix>
+									<toFile>event.xsd</toFile>
+								</transformSchema>
+							</transformSchemas>
+							<includes>
+								<include>com/redhat/poc/vo/*</include>
+							</includes>
+							<verbose>true</verbose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>
@@ -120,33 +154,7 @@
 					</instructions>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>schemagen</id>
-						<goals>
-							<goal>schemagen</goal>
-						</goals>
-					</execution>
-				</executions>
 
-				<configuration>
-					<transformSchemas>
-						<transformSchema>
-							<uri>urn:redhat.com:poc/class</uri>
-							<toPrefix>evt</toPrefix>
-							<toFile>event.xsd</toFile>
-						</transformSchema>
-					</transformSchemas>
-					<includes>
-						<include>com/redhat/poc/vo/*</include>
-					</includes>
-					<verbose>true</verbose>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>

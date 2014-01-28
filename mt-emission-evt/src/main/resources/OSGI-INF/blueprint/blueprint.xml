@@ -28,12 +28,20 @@
 	</cm:property-placeholder>
 
 	<camelContext trace="false" id="module.technique.emission.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
-    <route autoStartup="true" id="timer.evenement.route">
+    <route autoStartup="false" id="timer.evenement.route">
         <from uri="timer:timer?period={{timer.evenement.period}}"/>
         <setHeader headerName="source.generation">
             <constant>timer.route</constant>
         </setHeader>
         <to uri="direct:generation.evenement"/>
+    </route>
+    <route id="servlet.emission.evenement.route">
+        <from uri="servlet://event"/>
+        <setHeader headerName="source.generation">
+            <constant>servlet.route</constant>
+        </setHeader>
+        <to uri="log:com.redhat.poc?showAll=true"/>
+        <inOnly uri="direct:generation.evenement"/>
     </route>
     <route id="generation.evenement.route">
         <from uri="direct:generation.evenement"/>
@@ -46,9 +54,21 @@
     </route>
     <route id="emission.evenement.route">
         <from uri="direct:emission.evenement"/>
-        <log message="${body} ${header.source.generation}"/>
+        <log message="${body}"/>
         <to uri="{{emission.evenement.route.out}}"/>
     </route>
 </camelContext>
+
+	<service ref="camelServlet" interface="javax.servlet.http.HttpServlet">
+		<service-properties>
+			<entry key="alias" value="/camel/event" />
+			<entry key="matchOnUriPrefix" value="false" />
+			<entry key="servletName" value="CamelServlet" />
+			<entry key="servlet-name" value="CamelServlet" />
+		</service-properties>
+
+	</service>
+	<bean id="camelServlet"
+		class="org.apache.camel.component.servlet.CamelHttpTransportServlet" />
 
 </blueprint>

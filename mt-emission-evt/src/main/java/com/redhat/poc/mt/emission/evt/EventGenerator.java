@@ -28,19 +28,39 @@ import com.redhat.poc.vo.State;
 
 public class EventGenerator implements Processor {
 
-	public void process(Exchange exchange) throws Exception {
-		exchange.getOut().copyFrom(exchange.getIn());
+	private static String SOURCE_GENERATION = "source.generation";
+	private static String EVENT_AUTHOR = "event.author";
+	private static String EVENT_MESSAGE = "event.message";
 
+	public void process(Exchange exchange) throws Exception {
+		Event event = new Event();
+		String author = null;
+		String message = null;
+
+		exchange.getOut().copyFrom(exchange.getIn());
 		String body = exchange.getIn().getBody(String.class);
 
-		Event event = new Event();
 		event.setId(UUID.randomUUID().toString());
-		event.setAuthor(Referentiel.randomName());
+
+		author = (String) exchange.getIn().getHeader(EVENT_AUTHOR);
+		message = (String) exchange.getIn().getHeader(EVENT_MESSAGE);
+
+		if (author == null || "".compareTo(author) == 0) {
+			event.setAuthor(Referentiel.randomName());
+		} else {
+			event.setAuthor(author);
+		}
+
+		if (message != null) {
+			event.setMessage(message);
+		}
 		event.setSystem(Referentiel.randomSystem());
 		event.setCreationTime(Calendar.getInstance().getTime());
 		event.setGeo(Referentiel.randomISO3166_1alpha_3());
 		event.setVersion(Referentiel.randomVersion());
 		event.setState(State.NEW);
+
+		event.setType(((String) exchange.getIn().getHeader(SOURCE_GENERATION)));
 
 		if (StringUtils.isNotBlank(body)) {
 			event.setMessage(body);
