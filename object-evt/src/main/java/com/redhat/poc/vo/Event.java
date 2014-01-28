@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 // @NamedQuery(name = "new.event", query =
 // "SELECT e FROM Event e WHERE e.state = 'NEW'") }) Hibernate compliant
 @XmlRootElement(namespace = "urn:redhat.com:poc/class")
-@XmlType(namespace = "urn:redhat.com:poc/class")
+@XmlType(namespace = "urn:redhat.com:poc/class", name="eventType")
 public class Event {
 	@Id
 	// @GeneratedValue(generator = "uuid-string", strategy=)
