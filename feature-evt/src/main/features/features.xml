@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
 	name="feature-evt">
-	<!-- features:addurl mvn:com.redhat.poc/feature-evt/${project.version}/xml/features -->
+	<!-- features:addurl mvn:com.redhat.poc/feature-evt/${project.version}/xml/features 
+	     features:install main-evt reception-evt emission-evt 
+	-->
 
 	<feature name="emission-evt" version="${project.version}">
 		<feature>jpa</feature>
