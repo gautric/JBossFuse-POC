@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evt="urn:redhat.com:poc/class" targetNamespace="urn:redhat.com:poc/class" version="1.0">
+
+  <xs:element name="event" type="evt:eventType"/>
+
+  <xs:complexType name="eventType">
+    <xs:sequence>
+      <xs:element name="author" type="xs:string"/>
+      <xs:element name="creationTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="geo" type="xs:string"/>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element name="state" type="evt:stateType"/>
+      <xs:element minOccurs="0" name="system" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="stateType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NEW"/>
+      <xs:enumeration value="TRANSIENT"/>
+      <xs:enumeration value="SEND"/>
+      <xs:enumeration value="CLOSE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

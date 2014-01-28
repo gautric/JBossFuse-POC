@@ -11,7 +11,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @NamedQueries(value = {
@@ -21,33 +24,42 @@ import javax.xml.bind.annotation.XmlRootElement;
 // @NamedQuery(name = "new.event", query =
 // "SELECT e FROM Event e WHERE e.state = 'NEW'") }) Hibernate compliant
 @XmlRootElement(namespace = "urn:redhat.com:poc/class")
+@XmlType(namespace = "urn:redhat.com:poc/class")
 public class Event {
 	@Id
-	//@GeneratedValue(generator = "uuid-string", strategy=)
-	//@GenericGenerator(name = "uuid-string", strategy = "uuid2")
+	// @GeneratedValue(generator = "uuid-string", strategy=)
+	// @GenericGenerator(name = "uuid-string", strategy = "uuid2")
 	private String id;
+	
 	@Column(name = "creationTime")
 	private Date creationTime;
+	
 	@Column(name = "updateTime")
 	private Date updateTime;
+	
 	@Column(name = "type")
 	private String type;
+	
 	@Column(name = "author")
 	private String author;
+	
 	@Column(name = "message")
 	private String message;
+	
 	@Column(name = "system")
 	private String system;
+	
 	@Column(name = "geo")
 	private String geo;
+	
 	@Column(name = "state")
 	@Enumerated(EnumType.STRING)
 	private State state;
 
-	@XmlAttribute(name = "version")
 	@Transient
 	private String _version;
-	
+
+	@XmlAttribute(name = "version")
 	public String getVersion() {
 		return _version;
 	}
@@ -56,10 +68,11 @@ public class Event {
 		this._version = _version;
 	}
 
-	public Event(){
+	public Event() {
 		super();
 	}
-	
+
+	@XmlElement(required = true)
 	public State getState() {
 		return state;
 	}
@@ -68,6 +81,7 @@ public class Event {
 		this.state = state;
 	}
 
+	@XmlElement(required = true)
 	public String getId() {
 		return id;
 	}
@@ -76,6 +90,7 @@ public class Event {
 		this.id = id;
 	}
 
+	@XmlElement(required = true)
 	public Date getCreationTime() {
 		return creationTime;
 	}
@@ -84,6 +99,7 @@ public class Event {
 		this.creationTime = creationTime;
 	}
 
+	@XmlElement(required = false)
 	public String getType() {
 		return type;
 	}
@@ -92,6 +108,7 @@ public class Event {
 		this.type = type;
 	}
 
+	@XmlElement(required = true)
 	public String getAuthor() {
 		return author;
 	}
@@ -100,6 +117,7 @@ public class Event {
 		this.author = author;
 	}
 
+	@XmlElement(required = false)
 	public String getMessage() {
 		return message;
 	}
@@ -108,6 +126,7 @@ public class Event {
 		this.message = message;
 	}
 
+	@XmlElement(required = false)
 	public String getSystem() {
 		return system;
 	}
@@ -116,6 +135,7 @@ public class Event {
 		this.system = system;
 	}
 
+	@XmlElement(required = false)
 	public String getGeo() {
 		return geo;
 	}
@@ -124,6 +144,7 @@ public class Event {
 		this.geo = geo;
 	}
 
+	@XmlElement(required = false)
 	public Date getUpdateTime() {
 		return updateTime;
 	}

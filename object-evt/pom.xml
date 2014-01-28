@@ -27,6 +27,10 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>
@@ -112,8 +116,35 @@
 							org.apache.openjpa.util.*,
 							*
 						</Import-Package>
-						<!-- Meta-Persistence>META-INF/persistence-openjpa.xml</Meta-Persistence-->
+						<!-- Meta-Persistence>META-INF/persistence-openjpa.xml</Meta-Persistence -->
 					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>schemagen</id>
+						<goals>
+							<goal>schemagen</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<transformSchemas>
+						<transformSchema>
+							<uri>urn:redhat.com:poc/class</uri>
+							<toPrefix>evt</toPrefix>
+							<toFile>event.xsd</toFile>
+						</transformSchema>
+					</transformSchemas>
+					<includes>
+						<include>com/redhat/poc/vo/*</include>
+					</includes>
+					<verbose>true</verbose>
 				</configuration>
 			</plugin>
 		</plugins>
