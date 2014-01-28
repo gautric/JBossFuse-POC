@@ -1,7 +1,8 @@
 package com.redhat.poc.test;
 
 import java.io.File;
-import java.io.StringBufferInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 import javax.xml.XMLConstants;
@@ -33,28 +34,21 @@ public class XMLTestCase {
 
 	}
 
-	public static String xml = "<ns2:event xmlns:ns2=\"urn:redhat.com:poc/class\" version=\"1.0\">"
-			+ "<author>Marie</author>"
-			+ "<creationTime>2014-01-18T20:15:25.889+01:00</creationTime>"
-			+ "<id>23ff4ffd-6ebe-4a40-9736-13262d04d579</id>"
-			+ "<state>NEW</state>"
-			+ "<system>Externe</system>"
-			+ "</ns2:event>";
-
 	@Test
-	public void test2() throws JAXBException {
+	public void test2() throws JAXBException, FileNotFoundException {
 		JAXBContext jc = JAXBContext.newInstance("com.redhat.poc.vo");
 
 		Unmarshaller marshaller = jc.createUnmarshaller();
-		Event e = (Event) marshaller
-				.unmarshal(new StringBufferInputStream(xml));
+		Event e = (Event) marshaller.unmarshal(new FileInputStream(
+				"src/test/resources/event-1.xml"));
 		Assert.assertEquals("Marie", e.getAuthor());
 		Assert.assertEquals("1.0", e.getVersion());
 
 	}
 
 	@Test
-	public void test3() throws JAXBException, SAXException {
+	public void test3() throws JAXBException, SAXException,
+			FileNotFoundException {
 		JAXBContext jc = JAXBContext.newInstance("com.redhat.poc.vo");
 		SchemaFactory factory = SchemaFactory
 				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -64,8 +58,8 @@ public class XMLTestCase {
 		Unmarshaller marshaller = jc.createUnmarshaller();
 		marshaller.setSchema(schema);
 
-		Event e = (Event) marshaller
-				.unmarshal(new StringBufferInputStream(xml));
+		Event e = (Event) marshaller.unmarshal(new FileInputStream(
+				"src/test/resources/event-1.xml"));
 		Assert.assertEquals("Marie", e.getAuthor());
 		Assert.assertEquals("1.0", e.getVersion());
 
