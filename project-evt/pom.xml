@@ -142,6 +142,7 @@
 		<module>../osgi-main-evt</module>
 		<module>../feature-evt</module>
 		<module>../osgi-service-evt</module>
+		<module>../osgi-webapp-evt</module>
 	</modules>
 	<profiles>
 		<profile>

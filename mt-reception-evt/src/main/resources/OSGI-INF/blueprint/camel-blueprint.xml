@@ -19,6 +19,8 @@
 				value="direct:reception.transformation" />
 			<cm:property name="reception.transformation.evenement.route.out"
 				value="direct:reception.evenement" />
+			<cm:property name="reception.transformation.log.evenement.route"
+				value="websocket:event.ws?sendToAll=true" />
 			<cm:property name="activemq.broker.url"
 				value="failover:(tcp://localhost:61616)?jms.prefetchPolicy.all=1" />
 			<cm:property name="reception.evenement.route.out"
@@ -34,7 +36,7 @@
     </route>
     <route id="reception.transformation.evenement.route">
         <from uri="direct:reception.transformation"/>
-        <wireTap uri="websocket:event.ws?sendToAll=true"/>
+        <wireTap uri="{{reception.transformation.log.evenement.route}}"/>
         <unmarshal>
             <jaxb contextPath="com.redhat.poc.vo" partClass="com.redhat.poc.vo.Event"/>
         </unmarshal>
@@ -42,8 +44,8 @@
     </route>
     <route id="reception.evenement.route">
         <from uri="direct:reception.evenement"/>
-        <to uri="log:com.redhat.poc?showAll=true&amp;showBodyType=true"/>
         <to uri="{{reception.evenement.route.out}}"/>
+        <log message="Event OK"/>
     </route>
 </camelContext>
 
