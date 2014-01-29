@@ -4,8 +4,8 @@
 	<!-- features:addurl mvn:com.redhat.poc/feature-evt/${project.version}/xml/features 
 	     features:install main-evt reception-evt emission-evt
 	     
-	      
-	     curl http://localhost:8181/camel/event/?event.author=Greg
+	     curl "http://localhost:8181/camel/event/?event.message=Message1&event.author=Greg" 
+	     curl "http://localhost:8181/camel/event/?event.message=Message1&event.author=グレッグ" 
 	-->
 
 	<feature name="emission-evt" version="${project.version}">
