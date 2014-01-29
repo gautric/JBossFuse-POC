@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- parent> <groupId>com.redhat.poc</groupId> <artifactId>top-evt</artifactId> 
 		<version>0.0.4-SNAPSHOT</version> </parent -->
@@ -17,7 +16,7 @@
 		<camel.version>2.10.0.redhat-60024</camel.version>
 		<activemq.version>5.8.0.redhat-60024</activemq.version>
 		<cxf.version>2.6.0.redhat-60024</cxf.version>
-		<debry.version>10.8.2.2</debry.version>
+		<debry.version>10.10.1.1</debry.version>
 		<jaxb-api.version>2.1</jaxb-api.version>
 		<osgi.jta.datasource>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/eventds)</osgi.jta.datasource>
 	</properties>
@@ -61,7 +60,7 @@
 			<dependency>
 				<groupId>org.apache.derby</groupId>
 				<artifactId>derby</artifactId>
-				<version>10.9.1.0</version>
+				<version>${debry.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.camel</groupId>
@@ -130,7 +129,7 @@
 		<module>../osgi-main-evt</module>
 		<module>../feature-evt</module>
 		<module>../osgi-service-evt</module>
-	</modules>
+  </modules>
 	<profiles>
 		<profile>
 			<id>openjpa</id>
@@ -151,7 +150,7 @@
 				<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
 				<jdbc.driver>org.h2.Driver</jdbc.driver>
 				<xa.datasource>org.h2.jdbcx.JdbcDataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
+				<javax.persistence.jdbc.url/>
 				<javax.persistence.jdbc.url.testing>jdbc:h2:mem:eventDB;DB_CLOSE_DELAY=-1</javax.persistence.jdbc.url.testing>
 			</properties>
 		</profile>
@@ -165,7 +164,7 @@
 				<hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
 				<jdbc.driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc.driver>
 				<xa.datasource>org.apache.derby.jdbc.EmbeddedXADataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
+				<javax.persistence.jdbc.url/>
 				<javax.persistence.jdbc.url.testing>jdbc:derby:memory:eventDB;create=true</javax.persistence.jdbc.url.testing>
 			</properties>
 		</profile>
@@ -176,8 +175,8 @@
 				<hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
 				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
 				<xa.datasource>org.postgresql.xa.PGXADataSource</xa.datasource>
-				<javax.persistence.jdbc.url />
-				<javax.persistence.jdbc.url.testing />
+				<javax.persistence.jdbc.url/>
+				<javax.persistence.jdbc.url.testing/>
 			</properties>
 		</profile>
 	</profiles>
