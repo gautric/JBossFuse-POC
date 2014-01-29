@@ -70,136 +70,132 @@
 		</cm:default-properties>
 	</cm:property-placeholder>
 
-	<camelContext trace="false" id="osgi.main.evenement.context"
-		xmlns="http://camel.apache.org/schema/blueprint" xmlns:rh="urn:redhat.com:poc/class">
-		<errorHandler type="DefaultErrorHandler" level="ERROR"
-			redeliveryPolicyRef="myPolicy" id="eh" />
-		<redeliveryPolicyProfile maximumRedeliveries="0"
-			retryAttemptedLogLevel="ERROR" id="myPolicy" />
-		<onException redeliveryPolicyRef="myPolicy">
-			<exception>com.redhat.poc.osgi.main.evt.exception.UnknownCodeException</exception>
-			<exception>org.apache.cxf.binding.soap.SoapFault</exception>
-			<setBody>
-				<simple>${header.bodyBackup}</simple>
-			</setBody>
-			<removeHeader headerName="bodyBackup" />
-			<setHeader headerName="retry">
-				<constant>true</constant>
-			</setHeader>
-			<to uri="activemq:queue:reception.evenement.queue.DLQ" />
-		</onException>
-		<route id="jms.reception.evenement.route">
-			<from uri="activemq:queue:emission.evenement.queue" />
-			<transacted ref="PROPAGATION_REQUIRED" />
-			<to uri="direct:geocoding.transform.service" />
-			<to uri="activemq:queue:reception.evenement.queue" />
-		</route>
-		<route id="jms.reception.evenement.route.dlq">
-			<from uri="activemq:queue:reception.evenement.queue.DLQ" />
-			<to uri="activemq:queue:emission.evenement.queue" />
-		</route>
-		<route id="geocoding.transform.service.route">
-			<from uri="direct:geocoding.transform.service" />
-			<setHeader headerName="bodyBackup">
-				<simple>${body}</simple>
-			</setHeader>
-			<setBody>
-				<xpath>/rh:event/geo/text()</xpath>
-			</setBody>
-			<convertBodyTo type="java.lang.String" />
-			<log message="GeoCoding From JMS Request ${body}" />
-			<choice>
-				<when>
-					<simple>${header.retry} == true</simple>
-					<to uri="direct:geocoding.internal.java.service" />
-				</when>
-				<otherwise>
-					<to uri="direct:geocoding.internal.service" />
-				</otherwise>
-			</choice>
-			<log message="GeoCoding For JMS Response ${body}" />
-			<setHeader headerName="geoDecoding">
-				<simple>${body}</simple>
-			</setHeader>
-			<setBody>
-				<simple>${header.bodyBackup}</simple>
-			</setBody>
-			<removeHeader headerName="bodyBackup" />
-			<to uri="xslt:META-INF/geoCodingTransformation.xslt" />
-			<removeHeader headerName="geoDecoding" />
-		</route>
-		<route autoStartup="false" id="geocoding.timer.service.route">
-			<from uri="timer:timer?period=10000" />
-			<setBody>
-				<constant>CAN</constant>
-			</setBody>
-			<log message="GeoCoding Timer Request ${body}" />
-			<to uri="{{geocoding.switch.service}}" />
-			<log message="GeoCoding Timer Response ${body}" />
-		</route>
-		<route id="geocoding.external.service.route">
-			<from uri="direct:geocoding.external.service" />
-			<log message="GeoCoding External ${body}" />
-			<to
-				uri="cxf:bean:geocodingBeanWS?address={{geoconding.url}}&amp;wsdlURL=META-INF/wsdl/GeoCoding.wsdl&amp;defaultOperationName=convertCodeToName" />
-		</route>
-		<route id="geocoding.webservice.service.route">
-			<from uri="cxf:bean:geocodingBeanWS" />
-			<loadBalance>
-				<roundRobin />
-				<to uri="direct:geocoding.internal.java.service" />
-				<to uri="direct:geocoding.internal.xml.service" />
-			</loadBalance>
-		</route>
-		<route id="geocoding.internal.service.route">
-			<from uri="direct:geocoding.internal.service" />
-			<loadBalance>
-				<roundRobin />
-				<to uri="direct:geocoding.internal.java.service" />
-				<to uri="direct:geocoding.internal.xml.service" />
-			</loadBalance>
-		</route>
-		<route id="geocoding.internal.java.service.route">
-			<from uri="direct:geocoding.internal.java.service" />
-			<log message="GeoCoding Internal Java Service ${body}" />
-			<to uri="bean:geocodingBeanPOJO?method=convertCodeToName" />
-		</route>
-		<route id="geocoding.internal.xml.service.route">
-			<from uri="direct:geocoding.internal.xml.service" />
-			<log message="GeoCoding Internal XML Service ${body}" />
-			<choice>
-				<description>to uri="log:com.redhat.poc?showAll=true&amp;amp;showBodyType=true" /</description>
-				<when>
-					<simple>${body} == 'BRA'</simple>
-					<transform>
-						<constant>BRASIL</constant>
-					</transform>
-				</when>
-				<when>
-					<simple>${body} == 'CAN'</simple>
-					<transform>
-						<constant>CANADA</constant>
-					</transform>
-				</when>
-				<when>
-					<simple>${body} == 'FRA'</simple>
-					<transform>
-						<constant>FRANCE</constant>
-					</transform>
-				</when>
-				<when>
-					<simple>${body} == 'JPN'</simple>
-					<transform>
-						<constant>JAPAN</constant>
-					</transform>
-				</when>
-				<otherwise>
-					<throwException ref="uce">
-						<description>RUS, MAR</description>
-					</throwException>
-				</otherwise>
-			</choice>
-		</route>
-	</camelContext>
+	<camelContext trace="false" id="osgi.main.evenement.context" xmlns="http://camel.apache.org/schema/blueprint" xmlns:rh="urn:redhat.com:poc/class">
+    <errorHandler type="DefaultErrorHandler" level="ERROR" redeliveryPolicyRef="myPolicy" id="eh"/>
+    <redeliveryPolicyProfile maximumRedeliveries="0" retryAttemptedLogLevel="ERROR" id="myPolicy"/>
+    <onException redeliveryPolicyRef="myPolicy">
+        <exception>com.redhat.poc.osgi.main.evt.exception.UnknownCodeException</exception>
+        <exception>org.apache.cxf.binding.soap.SoapFault</exception>
+        <setBody>
+            <simple>${header.bodyBackup}</simple>
+        </setBody>
+        <removeHeader headerName="bodyBackup"/>
+        <setHeader headerName="retry">
+            <constant>true</constant>
+        </setHeader>
+        <to uri="activemq:queue:reception.evenement.queue.DLQ"/>
+    </onException>
+    <route id="jms.emission.evenement.route.main">
+        <from uri="activemq:queue:emission.evenement.queue"/>
+        <transacted ref="PROPAGATION_REQUIRED"/>
+        <to uri="direct:geocoding.transform.service"/>
+        <to uri="activemq:queue:reception.evenement.queue"/>
+    </route>
+    <route id="jms.reception.evenement.route.dlq">
+        <from uri="activemq:queue:reception.evenement.queue.DLQ"/>
+        <to uri="activemq:queue:emission.evenement.queue"/>
+    </route>
+    <route id="geocoding.transform.service.route">
+        <from uri="direct:geocoding.transform.service"/>
+        <setHeader headerName="bodyBackup">
+            <simple>${body}</simple>
+        </setHeader>
+        <setBody>
+            <xpath>/rh:event/geo/text()</xpath>
+        </setBody>
+        <convertBodyTo type="java.lang.String"/>
+        <log message="GeoCoding From JMS Request ${body}"/>
+        <choice>
+            <when>
+                <simple>${header.retry} == true</simple>
+                <to uri="direct:geocoding.internal.java.service"/>
+            </when>
+            <otherwise>
+                <to uri="direct:geocoding.internal.service"/>
+            </otherwise>
+        </choice>
+        <log message="GeoCoding For JMS Response ${body}"/>
+        <setHeader headerName="geoDecoding">
+            <simple>${body}</simple>
+        </setHeader>
+        <setBody>
+            <simple>${header.bodyBackup}</simple>
+        </setBody>
+        <removeHeader headerName="bodyBackup"/>
+        <to uri="xslt:META-INF/geoCodingTransformation.xslt"/>
+        <removeHeader headerName="geoDecoding"/>
+    </route>
+    <route autoStartup="false" id="geocoding.timer.service.route">
+        <from uri="timer:timer?period=10000"/>
+        <setBody>
+            <constant>CAN</constant>
+        </setBody>
+        <log message="GeoCoding Timer Request ${body}"/>
+        <to uri="{{geocoding.switch.service}}"/>
+        <log message="GeoCoding Timer Response ${body}"/>
+    </route>
+    <route id="geocoding.external.service.route">
+        <from uri="direct:geocoding.external.service"/>
+        <log message="GeoCoding External ${body}"/>
+        <to uri="cxf:bean:geocodingBeanWS?address={{geoconding.url}}&amp;wsdlURL=META-INF/wsdl/GeoCoding.wsdl&amp;defaultOperationName=convertCodeToName"/>
+    </route>
+    <route id="geocoding.webservice.service.route">
+        <from uri="cxf:bean:geocodingBeanWS"/>
+        <loadBalance>
+            <roundRobin/>
+            <to uri="direct:geocoding.internal.java.service"/>
+            <to uri="direct:geocoding.internal.xml.service"/>
+        </loadBalance>
+    </route>
+    <route id="geocoding.internal.service.route">
+        <from uri="direct:geocoding.internal.service"/>
+        <loadBalance>
+            <roundRobin/>
+            <to uri="direct:geocoding.internal.java.service"/>
+            <to uri="direct:geocoding.internal.xml.service"/>
+        </loadBalance>
+    </route>
+    <route id="geocoding.internal.java.service.route">
+        <from uri="direct:geocoding.internal.java.service"/>
+        <log message="GeoCoding Internal Java Service ${body}"/>
+        <to uri="bean:geocodingBeanPOJO?method=convertCodeToName"/>
+    </route>
+    <route id="geocoding.internal.xml.service.route">
+        <from uri="direct:geocoding.internal.xml.service"/>
+        <log message="GeoCoding Internal XML Service ${body}"/>
+        <choice>
+            <description>to uri="log:com.redhat.poc?showAll=true&amp;amp;showBodyType=true" /</description>
+            <when>
+                <simple>${body} == 'BRA'</simple>
+                <transform>
+                    <constant>BRASIL</constant>
+                </transform>
+            </when>
+            <when>
+                <simple>${body} == 'CAN'</simple>
+                <transform>
+                    <constant>CANADA</constant>
+                </transform>
+            </when>
+            <when>
+                <simple>${body} == 'FRA'</simple>
+                <transform>
+                    <constant>FRANCE</constant>
+                </transform>
+            </when>
+            <when>
+                <simple>${body} == 'JPN'</simple>
+                <transform>
+                    <constant>JAPAN</constant>
+                </transform>
+            </when>
+            <otherwise>
+                <throwException ref="uce">
+                    <description>RUS, MAR</description>
+                </throwException>
+            </otherwise>
+        </choice>
+    </route>
+</camelContext>
 
 </blueprint>
