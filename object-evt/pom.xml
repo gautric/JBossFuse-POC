@@ -150,7 +150,7 @@
 							org.apache.openjpa.util.*,
 							*
 						</Import-Package>
-						<!-- Meta-Persistence>META-INF/persistence-openjpa.xml</Meta-Persistence -->
+						<Bundle-Version>${event.api.version}</Bundle-Version>
 					</instructions>
 				</configuration>
 			</plugin>
