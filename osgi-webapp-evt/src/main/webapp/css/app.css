@@ -1,0 +1,21 @@
+table, td, th
+{
+	border:0px solid #0f0f0f;
+	padding:5px;
+}
+
+th
+{
+	background-color:#C3C3C3;
+	color:white;
+}
+
+.Interne 
+{
+	background-color:#FFC3C3;
+}
+
+.Externe 
+{
+	background-color:#C3FFC3;
+}

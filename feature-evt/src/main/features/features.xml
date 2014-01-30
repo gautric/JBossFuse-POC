@@ -26,6 +26,7 @@
 		<feature>transaction</feature>
 		<feature>activemq-camel</feature>
 		<feature>camel-websocket</feature>
+		<feature>camel-xmljson</feature>
 		<bundle>mvn:org.apache.geronimo.components/geronimo-connector/2.2.2
 		</bundle>
 		<bundle>mvn:commons-pool/commons-pool/1.5</bundle>  <!-- TODO template it -->

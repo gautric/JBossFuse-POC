@@ -28,7 +28,12 @@
 		</cm:default-properties>
 	</cm:property-placeholder>
 
+
+
 	<camelContext trace="false" id="module.technique.reception.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
+    <dataFormats>
+        <xmljson skipNamespaces="true" removeNamespacePrefixes="true" id="xmljson"/>
+    </dataFormats>
     <route id="jms.reception.evenement.route.mt">
         <from uri="activemq:queue:reception.evenement.queue"/>
         <transacted ref="PROPAGATION_REQUIRED"/>
@@ -36,11 +41,16 @@
     </route>
     <route id="reception.transformation.evenement.route">
         <from uri="direct:reception.transformation"/>
-        <wireTap uri="{{reception.transformation.log.evenement.route}}"/>
+        <wireTap uri="direct:tap.reception.evenement"/>
         <unmarshal>
             <jaxb contextPath="com.redhat.poc.vo" partClass="com.redhat.poc.vo.Event"/>
         </unmarshal>
         <to uri="{{reception.transformation.evenement.route.out}}"/>
+    </route>
+    <route id="tap.reception.evenement.route">
+        <from uri="direct:tap.reception.evenement"/>
+        <marshal ref="xmljson"/>
+        <to uri="{{reception.transformation.log.evenement.route}}"/>
     </route>
     <route id="reception.evenement.route">
         <from uri="direct:reception.evenement"/>
