@@ -131,6 +131,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<Bundle-Version>${event.api.version}</Bundle-Version>
 						<Bundle-SymbolicName>mt-reception-evt</Bundle-SymbolicName>
 						<Private-Package>com.redhat.poc.mt.reception.evt.*</Private-Package>
 						<Import-Package>

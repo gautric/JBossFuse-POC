@@ -37,6 +37,27 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.redhat.poc</groupId>
+			<artifactId>osgi-service-evt</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -95,6 +116,7 @@
 						<supportedProjectType>war</supportedProjectType>
 					</supportedProjectTypes>
 					<instructions>
+					    <Bundle-Version>${event.api.version}</Bundle-Version>
 						<Bundle-SymbolicName>webapp-evt</Bundle-SymbolicName>
 						<Import-Package>javax.servlet,
 							javax.servlet.http,
@@ -105,7 +127,6 @@
 						<Embed-Transitive>true</Embed-Transitive>
 						<Webapp-Context>/event.web</Webapp-Context>
 						<Web-ContextPath>/event.web</Web-ContextPath>
-						<Bundle-Blueprint>OSGI-INF/blueprint/blueprint.xml</Bundle-Blueprint>
 					</instructions>
 				</configuration>
 			</plugin>

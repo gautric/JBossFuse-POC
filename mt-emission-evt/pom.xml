@@ -107,6 +107,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<Bundle-Version>${event.api.version}</Bundle-Version>
 						<Bundle-SymbolicName>mt-emission-evt</Bundle-SymbolicName>
 						<Private-Package>com.redhat.poc.mt.emission.evt.*</Private-Package>
 						<Import-Package>
