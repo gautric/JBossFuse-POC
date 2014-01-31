@@ -17,10 +17,6 @@ public class EventServiceJPAImpl extends EventServiceAbstract implements
 		this.em = em;
 	}
 
-	public EntityManagerFactory getEntityManagerFactory() {
-		return null;
-	}
-
 	public void setEntityManagerFactory(
 			EntityManagerFactory entityManagerFactory) {
 		em = entityManagerFactory.createEntityManager();
