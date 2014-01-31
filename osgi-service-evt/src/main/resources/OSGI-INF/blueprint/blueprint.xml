@@ -17,22 +17,21 @@
 		<tx:transaction method="*" value="Required" />
 	</bean>
 
-	<service ref="eventService" interface="com.redhat.poc.service.EventService" />
+	<service ref="eventService" interface="com.redhat.poc.service.EventService">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="service/eventService" />
+		</service-properties>
+	</service>
 
 	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="localhost" />
 	</bean>
 
-	<!-- We're publishing our data source into the OSGi Service Registry as 
-		a `XADataSource`. This will allow Aries JTA to automatically enlist this 
-		resource as an XA-aware resource. We also assign the `osgi.jndi.service.name` 
-		property to give us an easy-to-use JNDI name to lookup this data source from 
-		our JPA persistence.xml in the `database` module afterwards. -->
-
 	<service ref="transactionsDataSource" interface="javax.sql.XADataSource">
 		<service-properties>
-			<entry key="osgi.jndi.service.name" value="jdbc/eventserviceds" />
+		    <entry key="transactional" value="true"/>
+			<entry key="osgi.jndi.service.name" value="jdbc/serviceeventds" />
 			<entry key="datasource.name" value="Derby" />
 		</service-properties>
 	</service>
@@ -43,6 +42,5 @@
 	<reference id="transactionManager" interface="javax.transaction.TransactionManager" />
 	<!-- needed by the ResourceManager in order to provide XA recovery -->
 	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory" />
-
 
 </blueprint>
