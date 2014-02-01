@@ -12,7 +12,7 @@
       ">
 
 	<camelcxf:cxfEndpoint id="geocodingBeanWS"
-		address="/services/geocoding"
+		address="/soap/geocoding"
 		serviceClass="com.redhat.poc.osgi.main.evt.service.impl.GeoCodingServiceImpl"
 		wsdlURL="META-INF/wsdl/GeoCoding.wsdl">
 		<camelcxf:properties>
@@ -65,7 +65,7 @@
 				value="activemq:queue:emission.evenement.queue" />
 			<cm:property name="activemq.broker.url" value="tcp://localhost:61616" />
 			<cm:property name="geoconding.url"
-				value="http://localhost:8181/cxf/services/geocoding" />
+				value="http://localhost:8181/cxf/soap/geocoding" />
 			<cm:property name="geocoding.switch.service" value="direct:geocoding.external.service" />
 		</cm:default-properties>
 	</cm:property-placeholder>
