@@ -1,4 +1,4 @@
-package com.redhat.poc.osgi.main.evt.service.impl;
+package com.redhat.poc.jaxws.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +12,8 @@ import javax.xml.ws.BindingType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.redhat.poc.osgi.main.evt.exception.UnknownCodeException;
-import com.redhat.poc.osgi.main.evt.service.GeoCodingService;
+import com.redhat.poc.jaxws.GeoCodingService;
+import com.redhat.poc.jaxws.exception.UnknownCodeException;
 
 @WebService(targetNamespace = "urn:redhat.com:poc/ws")
 @SOAPBinding

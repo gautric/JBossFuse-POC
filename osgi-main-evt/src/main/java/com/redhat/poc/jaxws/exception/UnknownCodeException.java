@@ -1,4 +1,4 @@
-package com.redhat.poc.osgi.main.evt.exception;
+package com.redhat.poc.jaxws.exception;
 
 import java.io.Serializable;
 

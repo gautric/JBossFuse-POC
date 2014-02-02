@@ -1,6 +1,6 @@
-package com.redhat.poc.osgi.main.evt.service;
+package com.redhat.poc.jaxws;
 
-import com.redhat.poc.osgi.main.evt.exception.UnknownCodeException;
+import com.redhat.poc.jaxws.exception.UnknownCodeException;
 
 public interface GeoCodingService {
 

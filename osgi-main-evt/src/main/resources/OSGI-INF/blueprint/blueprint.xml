@@ -13,7 +13,7 @@
 
 	<camelcxf:cxfEndpoint id="geocodingBeanWS"
 		address="/soap/geocoding"
-		serviceClass="com.redhat.poc.osgi.main.evt.service.impl.GeoCodingServiceImpl"
+		serviceClass="com.redhat.poc.jaxws.impl.GeoCodingServiceImpl"
 		wsdlURL="META-INF/wsdl/GeoCoding.wsdl">
 		<camelcxf:properties>
 			<entry key="dataFormat" value="POJO" />
@@ -21,7 +21,7 @@
 	</camelcxf:cxfEndpoint>
 
 	<bean id="geocodingBeanPOJO"
-		class="com.redhat.poc.osgi.main.evt.service.impl.GeoCodingServiceImpl">
+		class="com.redhat.poc.jaxws.impl.GeoCodingServiceImpl">
 	</bean>
 
 	<reference id="connectionFactory" interface="javax.jms.ConnectionFactory" />
