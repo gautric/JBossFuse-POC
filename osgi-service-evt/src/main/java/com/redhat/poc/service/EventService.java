@@ -11,7 +11,7 @@ public interface EventService {
 
 	void delete(String uuid);
 
-	List<Event> list();
+	List<Event> list(int offset, int limit);
 
 	void purge();
 

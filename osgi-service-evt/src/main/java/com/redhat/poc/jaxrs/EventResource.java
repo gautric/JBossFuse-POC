@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Request;
@@ -24,21 +25,17 @@ import com.redhat.poc.vo.Event;
 /**
  * Event Resource JAXRS Compliant
  * 
- *   REST Routing
- *   
- *   
- *  GET 	/				Event list
- *  DELETE 	/	 			Delete list
- *  POST   	/generate		Generate <nb> event into the database
- *   	param	nb
- *	POST	/event			Create new event (json format)
- * 	GET		/event/{uuid}	Retrieve event with id
- * 	DELETE	/event/{uuid}	Delete event with id
- * 	POST	/event/{uuid}	Update event with id 
+ * REST Routing
+ * 
+ * 
+ * GET / Event list DELETE / Delete list POST /generate Generate <nb> event into
+ * the database param nb POST /event Create new event (json format) GET
+ * /event/{uuid} Retrieve event with id DELETE /event/{uuid} Delete event with
+ * id POST /event/{uuid} Update event with id
  * 
  * 
  * @author gautric
- *
+ * 
  */
 @Path("/")
 public class EventResource {
@@ -60,9 +57,16 @@ public class EventResource {
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	public Response list() {
+	public Response list(@QueryParam("offset") @DefaultValue("0") int offset,
+			@QueryParam("limit") @DefaultValue("1000") int limit) {
 
-		List<Event> ret = service.list();
+		
+		
+		List<Event> ret = service.list(offset, limit);
+
+		if (ret == null || ret.size() == 0) {
+			return Response.status(Status.NO_CONTENT).build();
+		}
 
 		for (Event iter : ret) {
 			iter.setUrl(uriInfo.getBaseUriBuilder()

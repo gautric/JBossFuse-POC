@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 import com.redhat.poc.service.EventService;
 import com.redhat.poc.vo.Event;
@@ -37,9 +38,14 @@ public class EventServiceJPAImpl extends EventServiceAbstract implements
 		em.flush();
 	}
 
-	public List<Event> list() {
-		return em.createQuery(SELECT_E_FROM_EVENT_E, Event.class)
-				.getResultList();
+	public List<Event> list(int offset, int limit) {
+
+		Query q = em.createQuery(SELECT_E_FROM_EVENT_E, Event.class);
+
+		q.setFirstResult(offset);
+		q.setMaxResults(limit);
+
+		return q.getResultList();
 	}
 
 	public void purge() {

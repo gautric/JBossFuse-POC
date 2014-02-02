@@ -28,7 +28,7 @@ public class EventServiceTransientImpl extends EventServiceAbstract implements
 		localdb.remove(uuid);
 	}
 
-	public List<Event> list() {
+	public List<Event> list(int offset, int limit) {
 
 		return (List<Event>) localdb.values();
 	}
