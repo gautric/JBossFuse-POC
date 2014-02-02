@@ -5,7 +5,7 @@ import java.util.List;
 import com.redhat.poc.vo.Event;
 
 public interface EventService {
-	void create(Event event);
+	Event create(Event event);
 	
 	Event select(String uuid);
 
@@ -18,4 +18,6 @@ public interface EventService {
 	void generate(int n);
 
 	Event autogenerate();
+
+	Event modify(Event e);
 }

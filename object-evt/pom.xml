@@ -141,7 +141,8 @@
 				<configuration>
 					<instructions>
 						<Export-Package>
-							com.redhat.poc.vo
+							com.redhat.poc.vo,
+							com.redhat.poc.util
 						</Export-Package>
 						<Import-Package>
 							org.apache.openjpa.enhance,

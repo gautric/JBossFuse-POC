@@ -23,6 +23,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.commons.lang.StringUtils;
 
+import com.redhat.poc.util.Referentiel;
 import com.redhat.poc.vo.Event;
 import com.redhat.poc.vo.State;
 

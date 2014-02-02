@@ -16,11 +16,12 @@ public class EventServiceTransientImpl extends EventServiceAbstract implements
 	private Map<String, Event> localdb = Collections
 			.synchronizedMap(new HashMap<String, Event>());
 
-	public void create(Event event) {
+	public Event create(Event event) {
 		UUID uuid = UUID.randomUUID();
 		event.setId(uuid.toString());
 		event.setState(State.NEW);
 		localdb.put(uuid.toString(), event);
+		return event;
 	}
 
 	public void delete(String uuid) {
@@ -28,7 +29,7 @@ public class EventServiceTransientImpl extends EventServiceAbstract implements
 	}
 
 	public List<Event> list() {
-		
+
 		return (List<Event>) localdb.values();
 	}
 
@@ -42,5 +43,10 @@ public class EventServiceTransientImpl extends EventServiceAbstract implements
 		return null;
 	}
 
-	
+	@Override
+	public Event modify(Event e) {
+		localdb.put(e.getId(), e);
+		return e;
+	}
+
 }

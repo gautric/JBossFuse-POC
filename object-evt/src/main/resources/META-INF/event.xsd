@@ -15,7 +15,8 @@
       <xs:element minOccurs="0" name="type" type="xs:string"/>
       <xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
     </xs:sequence>
-    <xs:attribute name="version" type="xs:string"/>
+    <xs:attribute name="version" type="xs:string" />
+    <xs:attribute name="url" type="xs:string" />
   </xs:complexType>
 
   <xs:simpleType name="stateType">
