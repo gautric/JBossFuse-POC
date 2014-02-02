@@ -13,22 +13,22 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @NamedQueries(value = {
 		@NamedQuery(name = "event.per.state", query = "SELECT e FROM Event e WHERE e.state = :state"),
-		@NamedQuery(name = "new.event", query = "SELECT e FROM Event e WHERE e.state = com.redhat.poc.vo.State.NEW") })
+		@NamedQuery(name = "new.event", query = "SELECT e FROM Event e WHERE e.state = com.redhat.poc.vo.State.NEW"),
+		@NamedQuery(name = "select.event", query = "SELECT e FROM Event e WHERE e.state = :state AND e.creationTime = :creationTime") })
 @XmlRootElement(namespace = "urn:redhat.com:poc/class")
 @XmlType(namespace = "urn:redhat.com:poc/class", name = "eventType")
 public class Event {
-	
+
 	@Id
 	// @GeneratedValue(generator = "uuid-string", strategy=)
 	// @GenericGenerator(name = "uuid-string", strategy = "uuid2")
-	private String id;	
-	
+	private String id;
+
 	@Transient
 	private String _url;
 
