@@ -21,6 +21,25 @@ import javax.ws.rs.core.UriInfo;
 import com.redhat.poc.service.EventService;
 import com.redhat.poc.vo.Event;
 
+/**
+ * Event Resource JAXRS Compliant
+ * 
+ *   REST Routing
+ *   
+ *   
+ *  GET 	/				Event list
+ *  DELETE 	/	 			Delete list
+ *  POST   	/generate		Generate <nb> event into the database
+ *   	param	nb
+ *	POST	/event			Create new event (json format)
+ * 	GET		/event/{uuid}	Retrieve event with id
+ * 	DELETE	/event/{uuid}	Delete event with id
+ * 	POST	/event/{uuid}	Update event with id 
+ * 
+ * 
+ * @author gautric
+ *
+ */
 @Path("/")
 public class EventResource {
 
@@ -32,16 +51,18 @@ public class EventResource {
 
 	private EventService service = null;
 
+	/**
+	 * Event list
+	 * 
+	 * 
+	 * @return empty or full list
+	 */
 	@GET
 	@Path("/")
 	@Produces("application/json")
 	public Response list() {
 
 		List<Event> ret = service.list();
-
-		if (ret == null) {
-			return Response.status(Status.NOT_FOUND).build();
-		}
 
 		for (Event iter : ret) {
 			iter.setUrl(uriInfo.getBaseUriBuilder()
@@ -65,9 +86,9 @@ public class EventResource {
 	}
 
 	@POST
-	@Path("/generation")
+	@Path("/generate")
 	@Produces("application/json")
-	public void generation(@DefaultValue(value = "1") @FormParam("nb") int nb) {
+	public void generate(@DefaultValue(value = "1") @FormParam("nb") int nb) {
 		service.generate(nb);
 		Response.status(Status.ACCEPTED);
 	}
@@ -107,7 +128,7 @@ public class EventResource {
 	@POST
 	@Path("/event/{uuid}")
 	@Produces("application/json")
-	public Response select(@PathParam("uuid") String uuid, Event e) {
+	public Response update(@PathParam("uuid") String uuid, Event e) {
 
 		if (e.getId() != null || e.getId().length() == 0) {
 			return Response.status(Status.PRECONDITION_FAILED).build();
