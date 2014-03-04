@@ -27,39 +27,37 @@
 		</cm:default-properties>
 	</cm:property-placeholder>
 
-	<camelContext trace="false"
-		id="module.technique.emission.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
-		<route autoStartup="false" id="timer.evenement.route">
-			<from uri="timer:timer?period={{timer.evenement.period}}" />
-			<setHeader headerName="source.generation">
-				<constant>timer.route</constant>
-			</setHeader>
-			<to uri="direct:generation.evenement" />
-		</route>
-		<route id="servlet.emission.evenement.route">
-			<from uri="servlet://event" />
-			<setHeader headerName="source.generation">
-				<constant>servlet.route</constant>
-			</setHeader>
-			<to uri="log:com.redhat.poc?showAll=true" />
-			<inOnly uri="direct:generation.evenement" />
-		</route>
-		<route id="generation.evenement.route">
-			<from uri="direct:generation.evenement" />
-			<bean ref="eventGenerator" />
-			<marshal>
-				<jaxb contextPath="com.redhat.poc.vo" prettyPrint="true"
-					partNamespace="urn:redhat.com:poc" />
-			</marshal>
-			<convertBodyTo type="java.lang.String" charset="UTF-8" />
-			<to uri="{{generation.evenement.route.out}}" />
-		</route>
-		<route id="emission.evenement.route">
-			<from uri="direct:emission.evenement" />
-			<log message="${body}" />
-			<to uri="{{emission.evenement.route.out}}" />
-		</route>
-	</camelContext>
+	<camelContext trace="false" id="module.technique.emission.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
+    <route autoStartup="false" id="timer.evenement.route">
+        <from uri="timer:timer?period={{timer.evenement.period}}"/>
+        <setHeader headerName="source.generation">
+            <constant>timer.route</constant>
+        </setHeader>
+        <to uri="direct:generation.evenement"/>
+    </route>
+    <route id="servlet.emission.evenement.route">
+        <from uri="servlet://event"/>
+        <setHeader headerName="source.generation">
+            <constant>servlet.route</constant>
+        </setHeader>
+        <to uri="log:com.redhat.poc?showAll=true"/>
+        <inOnly uri="direct:generation.evenement"/>
+    </route>
+    <route id="generation.evenement.route">
+        <from uri="direct:generation.evenement"/>
+        <bean ref="eventGenerator"/>
+        <marshal>
+            <jaxb contextPath="com.redhat.poc.vo" prettyPrint="true" partNamespace="urn:redhat.com:poc"/>
+        </marshal>
+        <convertBodyTo type="java.lang.String" charset="UTF-8"/>
+        <to uri="{{generation.evenement.route.out}}"/>
+    </route>
+    <route id="emission.evenement.route">
+        <from uri="direct:emission.evenement"/>
+        <log message="${body}"/>
+        <to uri="{{emission.evenement.route.out}}"/>
+    </route>
+</camelContext>
 
 	<service ref="camelServlet" interface="javax.servlet.http.HttpServlet">
 		<service-properties>
@@ -68,7 +66,6 @@
 			<entry key="servletName" value="CamelServlet" />
 			<entry key="servlet-name" value="CamelServlet" />
 		</service-properties>
-S
 	</service>
 	<bean id="camelServlet"
 		class="org.apache.camel.component.servlet.CamelHttpTransportServlet" />
