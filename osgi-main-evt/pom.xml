@@ -120,10 +120,6 @@
 						<Bundle-SymbolicName>osgi-main-evt;
 							blueprint.graceperiod=true;
 							blueprint.timeout= 10000</Bundle-SymbolicName>
-						<Export-Package>com.redhat.poc.osgi.main.evt.service.*,
-							com.redhat.poc.osgi.main.evt.exception.*,
-							com.redhat.poc.xslt.*</Export-Package>
-						<Private-Package>com.redhat.poc.osgi.main.evt.service.impl.*</Private-Package>
 						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>

@@ -54,7 +54,7 @@
 	</bean>
 
 	<bean id="uce"
-		class="com.redhat.poc.osgi.main.evt.exception.UnknownCodeException" />
+		class="com.redhat.poc.jaxws.exception.UnknownCodeException" />
 
 	<!-- OSGI blueprint property placeholder -->
 	<cm:property-placeholder id="osgi.main.evenement.placeholder"
@@ -74,7 +74,7 @@
     <errorHandler type="DefaultErrorHandler" level="ERROR" redeliveryPolicyRef="myPolicy" id="eh"/>
     <redeliveryPolicyProfile maximumRedeliveries="0" retryAttemptedLogLevel="ERROR" id="myPolicy"/>
     <onException redeliveryPolicyRef="myPolicy">
-        <exception>com.redhat.poc.osgi.main.evt.exception.UnknownCodeException</exception>
+        <exception>com.redhat.poc.jaxws.exception.UnknownCodeException</exception>
         <exception>org.apache.cxf.binding.soap.SoapFault</exception>
         <setBody>
             <simple>${header.bodyBackup}</simple>
