@@ -7,10 +7,12 @@
 
 	<feature name="openjpa" version="${project.version}">
 		<bundle>mvn:commons-pool/commons-pool/${commons-pool.version}</bundle>  <!-- TODO template it -->
-		<bundle>mvn:commons-collections/commons-collections/${commons-collections.version}</bundle>
+		<bundle>mvn:commons-collections/commons-collections/${commons-collections.version}
+		</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/${commons-dbcp.version}</bundle>
 		<bundle>mvn:commons-lang/commons-lang/${commons-lang.version}</bundle>
-		<bundle>mvn:net.sourceforge.serp/com.springsource.serp/${serp.version}</bundle>
+		<bundle>mvn:net.sourceforge.serp/com.springsource.serp/${serp.version}
+		</bundle>
 		<bundle>mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle>
 	</feature>
 
@@ -25,7 +27,7 @@
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/mt-emission-evt/${project.version}</bundle>
 	</feature>
-	
+
 	<feature name="reception-evt" version="${project.version}">
 		<feature>jpa</feature>
 		<feature>camel-jpa</feature>
@@ -38,9 +40,10 @@
 		<feature>openjpa</feature>
 		<bundle>mvn:org.apache.derby/derbyclient/${debry.version}</bundle>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
-		<bundle>mvn:com.redhat.poc/mt-reception-evt/${project.version}</bundle>
+		<bundle>mvn:com.redhat.poc/mt-reception-evt/${project.version}
+		</bundle>
 	</feature>
-	
+
 	<feature name="main-evt" version="${project.version}">
 		<feature>jndi</feature>
 		<feature>transaction</feature>
@@ -56,8 +59,17 @@
 		<feature>openjpa</feature>
 		<bundle>mvn:org.apache.derby/derbyclient/${debry.version}</bundle>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
-		<bundle>mvn:com.redhat.poc/osgi-service-evt/${project.version}</bundle>		
-		<bundle>mvn:com.redhat.poc/osgi-webapp-evt/${project.version}/war</bundle>
+		<bundle>mvn:com.redhat.poc/osgi-service-evt/${project.version}
+		</bundle>
+		<bundle>mvn:com.redhat.poc/osgi-webapp-evt/${project.version}/war
+		</bundle>
+	</feature>
+
+	<feature name="full-evt" version="${project.version}">
+		<feature>webapp-evt</feature>
+		<feature>main-evt</feature>
+		<feature>emission-evt</feature>
+		<feature>reception-evt</feature>
 	</feature>
 
 </features>
