@@ -71,7 +71,7 @@
 	</cm:property-placeholder>
 
 	<camelContext trace="false" id="osgi.main.evenement.context" xmlns="http://camel.apache.org/schema/blueprint" xmlns:rh="urn:redhat.com:poc/class">
-    <errorHandler type="DefaultErrorHandler" level="ERROR" redeliveryPolicyRef="myPolicy" id="eh"/>
+    <errorHandler type="DefaultErrorHandler" level="ERROR"  redeliveryPolicyRef="myPolicy" id="eh"/>
     <redeliveryPolicyProfile maximumRedeliveries="0" retryAttemptedLogLevel="ERROR" id="myPolicy"/>
     <onException redeliveryPolicyRef="myPolicy">
         <exception>com.redhat.poc.jaxws.exception.UnknownCodeException</exception>
@@ -122,7 +122,7 @@
             <simple>${header.bodyBackup}</simple>
         </setBody>
         <removeHeader headerName="bodyBackup"/>
-        <to uri="xslt:META-INF/geoCodingTransformation.xslt"/>
+        <to uri="xslt:META-INF/geoCodingTransformation.xslt?allowStAX=false"/>
         <removeHeader headerName="geoDecoding"/>
     </route>
     <route autoStartup="false" id="geocoding.timer.service.route">

@@ -19,7 +19,7 @@
 		on the same machine so the server name is `localhost`. A database called 
 		`transactions` has been created up-front as well (see README.md). -->
   <!---->
-	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientDataSource">
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="localhost" />
 		<property name="createDatabase" value="create" />
@@ -31,10 +31,11 @@
 		property to give us an easy-to-use JNDI name to lookup this data source from 
 		our JPA persistence.xml in the `database` module afterwards. -->
 
-	<service ref="transactionsDataSource" interface="javax.sql.XADataSource">
+	<service ref="transactionsDataSource" interface="javax.sql.DataSource">
 		<service-properties>
 			<entry key="osgi.jndi.service.name" value="jdbc/eventds" />
 			<entry key="datasource.name" value="Derby" />
+			<entry key="aries.xa.name" value="XAeventds"/>
 		</service-properties>
 	</service>
 
