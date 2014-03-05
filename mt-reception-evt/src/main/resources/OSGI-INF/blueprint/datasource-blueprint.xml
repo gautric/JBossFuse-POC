@@ -9,33 +9,21 @@
 	and limitations under the License. -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
-
-	<!-- ********************************************************************* -->
-	<!-- Part 2: If bug ENTESB-633 did not exist we could auto-enlist the JDBC 
-		driver into Aries. -->
-	<!-- This defines the actual data source bean. It will instantiate a new 
-		ClientXADataSource instance and will use the corresponding settings to set 
-		the database and server name. In our case, we will be running Apache Derby 
-		on the same machine so the server name is `localhost`. A database called 
-		`transactions` has been created up-front as well (see README.md). -->
-  <!---->
-	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientDataSource">
+	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="localhost" />
 		<property name="createDatabase" value="create" />
+		<property name="user" value="event" />
+		<property name="password" value="event" />
 	</bean>
 
-	<!-- We're publishing our data source into the OSGi Service Registry as 
-		a `XADataSource`. This will allow Aries JTA to automatically enlist this 
-		resource as an XA-aware resource. We also assign the `osgi.jndi.service.name` 
-		property to give us an easy-to-use JNDI name to lookup this data source from 
-		our JPA persistence.xml in the `database` module afterwards. -->
-
-	<service ref="transactionsDataSource" interface="javax.sql.DataSource">
+	<service ref="transactionsDataSource" interface="javax.sql.XADataSource">
 		<service-properties>
 			<entry key="osgi.jndi.service.name" value="jdbc/eventds" />
 			<entry key="datasource.name" value="Derby" />
-			<entry key="aries.xa.name" value="XAeventds"/>
+			<entry key="aries.xa.name" value="XAevent" />
+			<entry key="aries.xa.username" value="event" />
+			<entry key="aries.xa.password" value="event" />
 		</service-properties>
 	</service>
 
