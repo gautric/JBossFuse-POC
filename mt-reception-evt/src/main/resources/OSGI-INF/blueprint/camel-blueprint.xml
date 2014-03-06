@@ -12,7 +12,6 @@
 		id="module.technique.reception.evenement.placeholder" persistent-id="module.technique.reception.evenement">
 		<!-- list some properties for this test -->
 		<cm:default-properties>
-			<cm:property name="database.hostname" value="localhost" />
 			<cm:property name="jms.reception.evenement.route.in"
 				value="activemq:queue:reception.evenement.queue" />
 			<cm:property name="jms.reception.evenement.route.out"

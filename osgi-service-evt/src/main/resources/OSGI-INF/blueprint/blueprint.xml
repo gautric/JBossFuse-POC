@@ -23,21 +23,6 @@
 		</service-properties>
 	</service>
 
-	<bean id="transactionsDataSource" class="org.apache.derby.jdbc.ClientDataSource">
-		<property name="databaseName" value="eventdb;" />
-		<property name="serverName" value="localhost" />
-		<property name="user" value="event" />
-		<property name="password" value="event" />
-	</bean>
-
-	<service ref="transactionsDataSource" interface="javax.sql.DataSource">
-		<service-properties>
-		    <entry key="transactional" value="true"/>
-			<entry key="osgi.jndi.service.name" value="jdbc/serviceeventds" />
-			<entry key="datasource.name" value="Derby" />
-		</service-properties>
-	</service>
-
 	<!-- Aries JTA provides a transaction manager that implements org.springframework.transaction.PlatformTransactionManager. -->
 	<reference id="platformTxManager"
 		interface="org.springframework.transaction.PlatformTransactionManager" />
