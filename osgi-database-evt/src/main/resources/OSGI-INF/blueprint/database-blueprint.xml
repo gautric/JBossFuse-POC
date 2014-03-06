@@ -1,39 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
-	license agreements. See the NOTICE file distributed with this work for additional 
-	information regarding copyright ownership. The ASF licenses this file to 
-	You under the Apache License, Version 2.0 (the "License"); you may not use 
-	this file except in compliance with the License. You may obtain a copy of 
-	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
-	by applicable law or agreed to in writing, software distributed under the 
-	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
-	OF ANY KIND, either express or implied. See the License for the specific 
-	language governing permissions and limitations under the License. -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	default-activation="lazy">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-	<bean id="serviceBean" class="com.redhat.poc.database.MyServiceImpl" />
+	<cm:property-placeholder id="module.database.evenement.placeholder"
+		persistent-id="module.database.evenement">
+		<cm:default-properties>
+			<cm:property name="database.hostname" value="localhost" />
+			<cm:property name="database.user" value="event" />
+			<cm:property name="database.password" value="event" />
+			<cm:property name="database.datasource.driver"
+				value="org.apache.derby.jdbc.ClientDataSource" />
+			<cm:property name="database.datasource.xadriver"
+				value="org.apache.derby.jdbc.ClientXADataSource" />
 
-	<service ref="serviceBean" interface="com.redhat.poc.database.MyService" />
-    
-   
-   
-  
-   
-    <!---->
+		</cm:default-properties>
+	</cm:property-placeholder>
+
 	<bean id="eventDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
 		<property name="databaseName" value="eventdb;" />
-		<property name="serverName" value="localhost" />
+		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
+		<property name="user" value="event" />
+		<property name="password" value="event" />
 	</bean>
 
-
-	<service ref="eventDataSource" interface="javax.sql.XADataSource">
+	<service ref="eventDataSource" interface="javax.sql.DataSource">
 		<service-properties>
-			<entry key="osgi.jndi.service.name" value="jdbc/eventds" />
-			<entry key="datasource.name" value="Derby" />
+			<entry key="osgi.jndi.service.name" value="jdbc/eventDS" />
+			<entry key="datasource.name" value="eventDS" />
 		</service-properties>
 	</service>
 
+	<bean id="eventXADataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+		<property name="databaseName" value="eventdb;" />
+		<property name="serverName" value="${database.hostname}" />
+		<property name="createDatabase" value="create" />
+		<property name="user" value="event" />
+		<property name="password" value="event" />
+	</bean>
+
+	<service ref="eventXADataSource" interface="javax.sql.XADataSource">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="jdbc/eventXADS" />
+			<entry key="datasource.name" value="eventXADS" />
+			<entry key="aries.xa.name" value="XAevent" />
+			<entry key="aries.xa.username" value="event" />
+			<entry key="aries.xa.password" value="event" />
+		</service-properties>
+	</service>
 
 </blueprint>
