@@ -246,16 +246,6 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
-				<executions> <execution> <id>start derby network server</id> <phase>generate-sources</phase> 
-				<goals> <goal>exec</goal> </goals> <configuration> <executable>java</executable> 
-				<arguments> <argument>-classpath</argument> <classpath /> <argument> org.apache.derby.drda.NetworkServerControl 
-				</argument> <argument>start</argument> </arguments> </configuration> </execution> 
-				<execution> <id>shutdown derby network server</id> <phase>install</phase> 
-				<goals> <goal>exec</goal> </goals> <configuration> <executable>java</executable> 
-				<arguments> <argument>-classpath</argument> <classpath /> <argument> org.apache.derby.drda.NetworkServerControl 
-				</argument> <argument>shutdown</argument> </arguments> </configuration> </execution> 
-				</executions> </plugin -->
 		</plugins>
 	</build>
 </project>
