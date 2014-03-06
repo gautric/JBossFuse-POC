@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
 	xsi:schemaLocation="
        http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
@@ -10,11 +11,10 @@
 			<cm:property name="database.hostname" value="localhost" />
 			<cm:property name="database.user" value="event" />
 			<cm:property name="database.password" value="event" />
-
 		</cm:default-properties>
 	</cm:property-placeholder>
 
-	<bean id="eventDataSource" class="${jdbc.datasource}"> <!-- POM Placeholder -->
+	<bean id="eventDataSource" class="org.apache.derby.jdbc.ClientDataSource">
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
@@ -29,7 +29,7 @@
 		</service-properties>
 	</service>
 
-	<bean id="eventXADataSource" class="${jdbc.xa.datasource}"> <!-- POM Placeholder -->
+	<bean id="eventXADataSource" class="org.apache.derby.jdbc.ClientXADataSource">
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
