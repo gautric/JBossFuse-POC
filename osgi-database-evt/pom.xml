@@ -48,11 +48,7 @@
 					<instructions>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Import-Package>
-							javax.sql,
-							org.apache.derby.jdbc;resolution:="optional",
-							org.osgi.service.blueprint;version="[1.0.0,2.0.0)"
-						</Import-Package>
+						<Import-Package>*</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
