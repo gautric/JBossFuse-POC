@@ -39,6 +39,8 @@
 		<feature>camel-xmljson</feature>
 		<feature>openjpa</feature>
 		<bundle>mvn:org.apache.derby/derbyclient/${debry.version}</bundle>
+		<bundle>mvn:com.redhat.poc/osgi-database-evt/${project.version}
+		</bundle>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/mt-reception-evt/${project.version}
 		</bundle>
@@ -58,6 +60,8 @@
 		<feature>transaction</feature>
 		<feature>openjpa</feature>
 		<bundle>mvn:org.apache.derby/derbyclient/${debry.version}</bundle>
+		<bundle>mvn:com.redhat.poc/osgi-database-evt/${project.version}
+		</bundle>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/osgi-service-evt/${project.version}
 		</bundle>

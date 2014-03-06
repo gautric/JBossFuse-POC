@@ -151,7 +151,7 @@
 		<module>../feature-evt</module>
 		<module>../osgi-service-evt</module>
 		<module>../osgi-webapp-evt</module>
-    <module>../osgi-database-evt</module>
+        <module>../osgi-database-evt</module>
   </modules>
 	<profiles>
 		<profile>

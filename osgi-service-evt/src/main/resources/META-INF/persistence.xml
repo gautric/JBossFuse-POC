@@ -14,7 +14,7 @@
 
 	<persistence-unit name="event-service-pu"
 		transaction-type="JTA">
-		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/serviceeventds)
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/eventDS)
 		</jta-data-source>
 		<class>com.redhat.poc.vo.Event</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
