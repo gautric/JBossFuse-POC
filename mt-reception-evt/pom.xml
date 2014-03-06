@@ -46,8 +46,6 @@
 			</exclusions>
 			<scope>test</scope>
 		</dependency>
-		<!--dependency> <groupId>org.ow2.asm</groupId> <artifactId>asm-all</artifactId> 
-			<version>4.0</version> <scope>test</scope> </dependency -->
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jpa_2.0_spec</artifactId>
@@ -89,7 +87,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
+			<version>${commons-lang.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -104,24 +102,6 @@
 		<defaultGoal>install</defaultGoal>
 
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.3</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
 			<!-- to generate the MANIFEST-FILE of the bundle -->
 			<plugin>
 				<groupId>org.apache.felix</groupId>

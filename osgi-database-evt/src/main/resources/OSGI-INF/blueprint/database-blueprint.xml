@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xsi:schemaLocation="
+       http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<cm:property-placeholder id="module.database.evenement.placeholder"
+		persistent-id="module.database.evenement">
+		<cm:default-properties>
+			<cm:property name="database.hostname" value="localhost" />
+			<cm:property name="database.user" value="event" />
+			<cm:property name="database.password" value="event" />
+			<cm:property name="database.datasource.driver"
+				value="org.apache.derby.jdbc.ClientDataSource" />
+			<cm:property name="database.datasource.xadriver"
+				value="org.apache.derby.jdbc.ClientXADataSource" />
+
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<bean id="eventDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+		<property name="databaseName" value="eventdb;" />
+		<property name="serverName" value="${database.hostname}" />
+		<property name="createDatabase" value="create" />
+		<property name="user" value="event" />
+		<property name="password" value="event" />
+	</bean>
+
+	<service ref="eventDataSource" interface="javax.sql.DataSource">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="jdbc/eventDS" />
+			<entry key="datasource.name" value="eventDS" />
+		</service-properties>
+	</service>
+
+	<bean id="eventXADataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+		<property name="databaseName" value="eventdb;" />
+		<property name="serverName" value="${database.hostname}" />
+		<property name="createDatabase" value="create" />
+		<property name="user" value="event" />
+		<property name="password" value="event" />
+	</bean>
+
+	<service ref="eventXADataSource" interface="javax.sql.XADataSource">
+		<service-properties>
+			<entry key="osgi.jndi.service.name" value="jdbc/eventXADS" />
+			<entry key="datasource.name" value="eventXADS" />
+			<entry key="aries.xa.name" value="XAevent" />
+			<entry key="aries.xa.username" value="event" />
+			<entry key="aries.xa.password" value="event" />
+		</service-properties>
+	</service>
+
+</blueprint>
