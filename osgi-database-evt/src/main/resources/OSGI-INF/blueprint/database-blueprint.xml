@@ -22,8 +22,8 @@
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
-		<property name="user" value="event" />
-		<property name="password" value="event" />
+		<property name="user" value="${database.user}" />
+		<property name="password" value="${database.password}" />
 	</bean>
 
 	<service ref="eventDataSource" interface="javax.sql.DataSource">
@@ -37,8 +37,8 @@
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
-		<property name="user" value="event" />
-		<property name="password" value="event" />
+		<property name="user" value="${database.user}" />
+		<property name="password" value="${database.password}" />
 	</bean>
 
 	<service ref="eventXADataSource" interface="javax.sql.XADataSource">
@@ -46,8 +46,8 @@
 			<entry key="osgi.jndi.service.name" value="jdbc/eventXADS" />
 			<entry key="datasource.name" value="eventXADS" />
 			<entry key="aries.xa.name" value="XAevent" />
-			<entry key="aries.xa.username" value="event" />
-			<entry key="aries.xa.password" value="event" />
+			<entry key="aries.xa.username" value="${database.user}" />
+			<entry key="aries.xa.password" value="${database.password}" />
 		</service-properties>
 	</service>
 
