@@ -17,7 +17,7 @@
 	<parent>
 		<artifactId>project-evt</artifactId>
 		<groupId>com.redhat.poc</groupId>
-		<version>0.0.4</version>
+		<version>0.0.5-SNAPSHOT</version>
 		<relativePath>../project-evt</relativePath>
 	</parent>
 
