@@ -10,15 +10,11 @@
 			<cm:property name="database.hostname" value="localhost" />
 			<cm:property name="database.user" value="event" />
 			<cm:property name="database.password" value="event" />
-			<cm:property name="database.datasource.driver"
-				value="org.apache.derby.jdbc.ClientDataSource" />
-			<cm:property name="database.datasource.xadriver"
-				value="org.apache.derby.jdbc.ClientXADataSource" />
 
 		</cm:default-properties>
 	</cm:property-placeholder>
 
-	<bean id="eventDataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+	<bean id="eventDataSource" class="${jdbc.datasource}"> <!-- POM Placeholder -->
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />
@@ -33,7 +29,7 @@
 		</service-properties>
 	</service>
 
-	<bean id="eventXADataSource" class="org.apache.derby.jdbc.ClientXADataSource">
+	<bean id="eventXADataSource" class="${jdbc.xa.datasource}"> <!-- POM Placeholder -->
 		<property name="databaseName" value="eventdb;" />
 		<property name="serverName" value="${database.hostname}" />
 		<property name="createDatabase" value="create" />

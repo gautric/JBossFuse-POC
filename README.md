@@ -14,13 +14,16 @@ Start JBossFuse
 ```
  $> bin/fuse
 
- @> features:addurl mvn:com.redhat.poc/feature-evt/0.0.1-SNAPSHOT/xml/features
+ @> features:addurl mvn:com.redhat.poc/feature-evt/0.0.4-SNAPSHOT/xml/features
 
  @> features:install main-evt
 
  @> features:install reception-evt
 
  @> features:install emission-evt
+
+ @> features:install full-evt // for all features
+
 ```
 
 Take a look into JBossFuse log file and have fun ;-)
