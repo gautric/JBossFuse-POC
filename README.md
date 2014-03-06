@@ -24,10 +24,10 @@ Create SCHEMA Event (via ij)
 
 ```
  derby> CREATE SCHEMA EVENT;
+ derby> SET SCHEMA EVENT;
+ derby> CREATE TABLE Event (id VARCHAR(255) NOT NULL, author VARCHAR(255), creationTime TIMESTAMP, geo VARCHAR(255), message VARCHAR(255), state VARCHAR(20), system VARCHAR(255), type VARCHAR(255), updateTime TIMESTAMP, PRIMARY KEY (id));
  
 ``` 
-And Execute object-evt/target/database.sql to create "event" table
-
 
 Modify etc/users.properties to activate admin=admin,admin user
 
@@ -56,7 +56,9 @@ Connect to Karaf console
 
 Connect to WebEvent Controler
 
+```
  http://localhost:8181/event.web/event.html
+```
 
 Take a look into JBossFuse log file and have fun ;-)
 
