@@ -27,6 +27,7 @@
 		</cm:default-properties>
 	</cm:property-placeholder>
 
+	<bean id="eventUpdate" class="com.redhat.poc.mt.reception.evt.EventUpdate" />
 
 
 	<camelContext trace="false" id="module.technique.reception.evenement.context" xmlns="http://camel.apache.org/schema/blueprint">
@@ -36,14 +37,12 @@
     <route id="jms.reception.evenement.route.mt">
         <from uri="activemq:queue:reception.evenement.queue"/>
         <transacted ref="PROPAGATION_REQUIRED"/>
+        <bean ref="eventUpdate"/>
         <to uri="{{jms.reception.evenement.route.out}}"/>
     </route>
     <route id="reception.transformation.evenement.route">
         <from uri="direct:reception.transformation"/>
         <wireTap uri="direct:tap.reception.evenement"/>
-        <unmarshal>
-            <jaxb contextPath="com.redhat.poc.vo" partClass="com.redhat.poc.vo.Event"/>
-        </unmarshal>
         <to uri="{{reception.transformation.evenement.route.out}}"/>
     </route>
     <route id="tap.reception.evenement.route">

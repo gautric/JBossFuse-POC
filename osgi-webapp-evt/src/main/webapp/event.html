@@ -23,6 +23,7 @@
 	      		<th>system</th>
 	      		<th>type</th>
 	      		<th>creationTime</th>
+	      		<th>updateTime</th>
 	      		<th>geo</th>
 	      		<th>id</th>
 	      </tr>
@@ -32,6 +33,7 @@
 	      		<td>{{event.system}}</td>
 	      		<td>{{event.type}}</td>
 	      		<td><span title="{{event.creationTime}}">{{formatDate(event.creationTime)}}</span></td>
+	      		<td><span title="{{event.updateTime}}">{{formatDate(event.updateTime)}}</span></td>
 	      		<td><a href="http://en.wikipedia.org/wiki/{{capitaliseFirstLetter(event.geo)}}">{{event.geo}}</a></td>
 	      		<td>{{event.id}}</td>
 	      </tr>
