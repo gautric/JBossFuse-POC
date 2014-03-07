@@ -20,9 +20,10 @@
 		<feature>jpa</feature>
 		<feature>http</feature>
 		<feature>jndi</feature>
+		<feature>war</feature>
+		<feature>openjpa</feature>
 		<feature>transaction</feature>
 		<feature>activemq-camel</feature>
-		<feature>war</feature>
 		<feature>camel-servlet</feature>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/mt-emission-evt/${project.version}</bundle>
