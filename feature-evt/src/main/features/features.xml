@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
-	name="feature-evt">
+	name="feature-evt-${project.version}">
 	<!-- features:addurl mvn:com.redhat.poc/feature-evt/${project.version}/xml/features 
 		features:install main-evt reception-evt emission-evt webapp-evt curl "http://localhost:8181/camel/event/?event.message=Message1&event.author=グレッグ" 
 		chrome http://localhost:8181/event.web/event.html -->
