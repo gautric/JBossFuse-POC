@@ -6,9 +6,7 @@
 		
 		  <title>Tableau des Evenements {{events.length}}</title>
 		  <link rel="stylesheet" href="css/app.css" type="text/css">
-		  
-	
-		  
+		  	  
 	</head>
 	<body>
 	   Search: <input ng-model="query">
@@ -16,6 +14,7 @@
 	   <button ng-click="limit(-10)">10</button>   
 	   <button ng-click="limit(-15)">15</button>  
 	   <button ng-click="limit(-30)">30</button>  
+	   	   <p>Total number of event: {{events.length}}</p>
 	      <table>
 	      <tr>
 	      		<th>author</th>
@@ -38,7 +37,7 @@
 	      		<td>{{event.id}}</td>
 	      </tr>
 	    </table>
-	   <p>Total number of event: {{events.length}}</p>
+
 	   
 	   <!-- BEGIN Script -->
 	   

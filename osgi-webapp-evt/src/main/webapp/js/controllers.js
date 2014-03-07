@@ -23,12 +23,10 @@
       console.log("Received data from websocket: ", data);    
       $scope.events.push(data);
       $scope.$digest();
-     
     }
     
     $scope.limit = function(i) {
        $scope.eventLimit = i;
-     //  $scope.$digest();
     }
     
     $scope.formatDate = function(date) {
