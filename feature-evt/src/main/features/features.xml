@@ -2,11 +2,12 @@
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
 	name="feature-evt-${project.version}">
 	<!-- features:addurl mvn:com.redhat.poc/feature-evt/${project.version}/xml/features 
-		features:install main-evt reception-evt emission-evt webapp-evt curl "http://localhost:8181/camel/event/?event.message=Message1&event.author=グレッグ" 
+		features:install main-evt reception-evt emission-evt webapp-evt 
+		curl "http://localhost:8181/camel/event/?event.message=Message1&event.author=グレッグ" 
 		chrome http://localhost:8181/event.web/event.html -->
 
 	<feature name="openjpa" version="${project.version}">
-		<bundle>mvn:commons-pool/commons-pool/${commons-pool.version}</bundle>  <!-- TODO template it -->
+		<bundle>mvn:commons-pool/commons-pool/${commons-pool.version}</bundle>
 		<bundle>mvn:commons-collections/commons-collections/${commons-collections.version}
 		</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/${commons-dbcp.version}</bundle>
