@@ -16,7 +16,7 @@
 
 	<!-- OSGI blueprint property place holder -->
 	<cm:property-placeholder
-		id="module.technique.emission.evenement.placeholder" persistent-id="module.technique.emission.evenement">
+		id="module.technique.emission.evenement.placeholder" persistent-id="module.technique.emission.evenement" update-strategy="reload" >
 		<!-- list some properties for this test -->
 		<cm:default-properties>
 			<cm:property name="timer.evenement.period" value="10000" />
