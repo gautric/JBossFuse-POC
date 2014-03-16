@@ -12,8 +12,6 @@
 		id="module.technique.reception.evenement.placeholder" persistent-id="module.technique.reception.evenement">
 		<!-- list some properties for this test -->
 		<cm:default-properties>
-			<cm:property name="jms.reception.evenement.route.in"
-				value="activemq:queue:reception.evenement.queue" />
 			<cm:property name="jms.reception.evenement.route.out"
 				value="direct:reception.transformation" />
 			<cm:property name="reception.transformation.evenement.route.out"
@@ -34,8 +32,8 @@
     <dataFormats>
         <xmljson skipNamespaces="true" removeNamespacePrefixes="true" id="xmljson"/>
     </dataFormats>
-    <route id="jms.reception.evenement.route.mt">
-        <from uri="activemq:queue:reception.evenement.queue"/>
+    <route autoStartup="false" id="jms.reception.evenement.route.mt">
+        <from uri="jms:queue:reception.evenement.queue"/>
         <transacted ref="PROPAGATION_REQUIRED"/>
         <bean ref="eventUpdate"/>
         <to uri="{{jms.reception.evenement.route.out}}"/>
@@ -53,7 +51,7 @@
     <route id="reception.evenement.route">
         <from uri="direct:reception.evenement"/>
         <to uri="{{reception.evenement.route.out}}"/>
-        <log message="Event OK"/>
+        <log message="Event ${body.id} Reception and Store OK" loggingLevel="INFO"/>
     </route>
 </camelContext>
 

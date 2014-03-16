@@ -18,7 +18,7 @@
 		<argument ref="transactionManager" />
 	</bean>
 
-	<bean id="amq" class="org.apache.camel.component.jms.JmsComponent">
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
 		<property name="configuration" ref="AMQConfig" />
 	</bean>
 
