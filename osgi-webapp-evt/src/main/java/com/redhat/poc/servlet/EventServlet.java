@@ -16,21 +16,20 @@ import com.redhat.poc.service.EventService;
 
 public class EventServlet extends GenericServlet {
 
-	public static String JNDI_SERVICE_KEY = "com.redhat.poc.service.jndi.name"; 
-	
-	
+	public static String JNDI_SERVICE_KEY = "com.redhat.poc.service.jndi.name";
+
 	private EventService es = null;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		
+
 		String serviceName = config.getInitParameter(JNDI_SERVICE_KEY);
-		
+
 		Context ctx;
 		try {
 			ctx = new InitialContext();
-			es = (EventService)ctx.lookup(serviceName);
+			es = (EventService) ctx.lookup(serviceName);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
