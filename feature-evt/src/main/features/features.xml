@@ -24,7 +24,6 @@
 		<feature>war</feature>
 		<feature>openjpa</feature>
 		<feature>transaction</feature>
-		<feature>activemq-camel</feature>
 		<feature>camel-servlet</feature>
 		<bundle>mvn:com.redhat.poc/object-evt/${project.version}</bundle>
 		<bundle>mvn:com.redhat.poc/mt-emission-evt/${project.version}</bundle>
@@ -36,7 +35,6 @@
 		<feature>http</feature>
 		<feature>jndi</feature>
 		<feature>transaction</feature>
-		<feature>activemq-camel</feature>
 		<feature>camel-websocket</feature>
 		<feature>camel-xmljson</feature>
 		<feature>openjpa</feature>
@@ -51,7 +49,6 @@
 	<feature name="main-evt" version="${project.version}">
 		<feature>jndi</feature>
 		<feature>transaction</feature>
-		<feature>activemq-camel</feature>
 		<bundle>mvn:com.redhat.poc/osgi-main-evt/${project.version}</bundle>
 	</feature>
 
