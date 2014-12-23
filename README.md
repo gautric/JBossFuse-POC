@@ -22,10 +22,10 @@ bin/startNetworkServer
 
 Create SCHEMA Event (via ij)
 
-```
- derby> CREATE SCHEMA EVENT;
- derby> SET SCHEMA EVENT;
- derby> CREATE TABLE Event (id VARCHAR(255) NOT NULL, author VARCHAR(255), creationTime TIMESTAMP, geo VARCHAR(255), message VARCHAR(255), state VARCHAR(20), system VARCHAR(255), type VARCHAR(255), updateTime TIMESTAMP, PRIMARY KEY (id));
+```sql
+ CREATE SCHEMA EVENT;
+ SET SCHEMA EVENT;
+ CREATE TABLE Event (id VARCHAR(255) NOT NULL, author VARCHAR(255), creationTime TIMESTAMP, geo VARCHAR(255), message VARCHAR(255), state VARCHAR(20), system VARCHAR(255), type VARCHAR(255), updateTime TIMESTAMP, PRIMARY KEY (id));
  
 ``` 
 
@@ -35,7 +35,7 @@ Start JBossFuse
 ```
  $> bin/fuse
 
- @> features:addurl mvn:com.redhat.poc/feature-evt/0.0.4-SNAPSHOT/xml/features
+ @> features:addurl mvn:com.redhat.poc/feature-evt/0.9.1-SNAPSHOT/xml/features
 
  @> features:install main-evt
 
